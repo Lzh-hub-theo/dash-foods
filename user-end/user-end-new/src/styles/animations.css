@@ -1,0 +1,115 @@
+/* ===========================================================
+ * dash-foods · 全局动效
+ * ========================================================= */
+
+/* 入场：渐显 + 上浮 */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 呼吸灯：营业状态 */
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(63, 107, 58, 0.5);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+    box-shadow: 0 0 0 10px rgba(63, 107, 58, 0);
+  }
+}
+
+@keyframes pulse-tomato {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(217, 83, 79, 0.5);
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+    box-shadow: 0 0 0 10px rgba(217, 83, 79, 0);
+  }
+}
+
+/* 购物车 +1 抛物动画 */
+@keyframes fly-to-cart {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(140px, -120px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(220px, -180px) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* 抽屉滑入 */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* 滚动 marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* 通用工具类 */
+.fade-up {
+  animation: fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+.stagger > * {
+  animation: fade-up var(--dur-slow) var(--ease-out) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 40ms; }
+.stagger > *:nth-child(2) { animation-delay: 120ms; }
+.stagger > *:nth-child(3) { animation-delay: 200ms; }
+.stagger > *:nth-child(4) { animation-delay: 280ms; }
+.stagger > *:nth-child(5) { animation-delay: 360ms; }
+.stagger > *:nth-child(6) { animation-delay: 440ms; }
+.stagger > *:nth-child(7) { animation-delay: 520ms; }
+.stagger > *:nth-child(8) { animation-delay: 600ms; }

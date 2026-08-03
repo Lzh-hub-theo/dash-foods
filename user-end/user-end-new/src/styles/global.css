@@ -1,0 +1,43 @@
+@import './tokens.css';
+@import './reset.css';
+@import './animations.css';
+
+/* 全局工具类 */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.serif {
+  font-family: var(--font-display);
+}
+
+.sans {
+  font-family: var(--font-body);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-12);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-sage);
+}
+
+.divider-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-ink-mute);
+  margin: 0 12px;
+  vertical-align: middle;
+}
+
+/* 渐入 */
+.page-enter {
+  animation: fade-up 480ms var(--ease-out) both;
+}

@@ -1,0 +1,99 @@
+/* ===========================================================
+ * dash-foods · 设计令牌
+ * 风格：清新明亮轻食（farm-to-table digital bistro）
+ * 排版：Fraunces 衬线（标题/价格） + Manrope 无衬线（正文）
+ * ========================================================= */
+
+:root {
+  /* —— 颜色 · 主色 —— */
+  --color-cream: #faf8f3;        /* 主背景：奶油米白 */
+  --color-cream-soft: #f4efe4;   /* 二级底色：燕麦色 */
+  --color-paper: #fffefa;        /* 卡片底：纸白 */
+  --color-butter: #ffe9b8;       /* 暖黄点缀：butter */
+
+  --color-sage: #3f6b3a;         /* 主色：鼠尾草绿 */
+  --color-sage-deep: #2f5230;    /* 深绿：hover/重点 */
+  --color-sage-soft: #a4c49a;    /* 浅绿：辅助/分割 */
+  --color-sage-mist: #d8e6d2;    /* 雾绿：背景晕染 */
+
+  --color-apricot: #f2a65a;      /* 橙：强调/价格 */
+  --color-apricot-deep: #e08838; /* 橙深：hover */
+  --color-tomato: #d9534f;       /* 番茄红：促销/状态 */
+  --color-cherry: #b03a37;       /* 樱桃红：深红 */
+
+  --color-ink: #1f2a1d;          /* 主文字：墨色 */
+  --color-ink-soft: #4a5c46;     /* 次文字 */
+  --color-ink-mute: #8a9684;     /* 辅助文字 */
+  --color-line: #e5dfd0;         /* 描边/分割线 */
+  --color-line-soft: #efeadd;    /* 浅描边 */
+
+  /* —— 渐变 —— */
+  --gradient-cream: linear-gradient(180deg, #fffefa 0%, #f4efe4 100%);
+  --gradient-leaf: radial-gradient(
+      circle at 20% 0%,
+      rgba(164, 196, 154, 0.45) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 90% 100%,
+      rgba(242, 166, 90, 0.25) 0%,
+      transparent 60%
+    );
+  --gradient-warm: linear-gradient(135deg, #ffe9b8 0%, #f2a65a 100%);
+
+  /* —— 阴影 —— */
+  --shadow-soft: 0 2px 8px rgba(31, 42, 29, 0.04), 0 8px 24px rgba(31, 42, 29, 0.05);
+  --shadow-card: 0 1px 2px rgba(31, 42, 29, 0.04), 0 12px 32px -8px rgba(31, 42, 29, 0.08);
+  --shadow-hover: 0 2px 4px rgba(31, 42, 29, 0.05), 0 24px 48px -12px rgba(63, 107, 58, 0.18);
+  --shadow-press: 0 1px 2px rgba(31, 42, 29, 0.06);
+  --shadow-ring: 0 0 0 4px rgba(63, 107, 58, 0.12);
+
+  /* —— 圆角 —— */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* —— 字号 —— */
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  --fs-28: 28px;
+  --fs-32: 32px;
+  --fs-40: 40px;
+  --fs-48: 48px;
+  --fs-56: 56px;
+  --fs-72: 72px;
+  --fs-88: 88px;
+
+  /* —— 字族 —— */
+  --font-display: 'Fraunces', 'Noto Serif SC', Georgia, 'Times New Roman', serif;
+  --font-body: 'Manrope', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-serif-cn: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+
+  /* —— 行高 / 间距 —— */
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-normal: 1.5;
+  --lh-loose: 1.7;
+
+  /* —— 动效 —— */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+
+  /* —— 布局 —— */
+  --max-w: 1280px;
+  --gutter: 32px;
+  --header-h: 76px;
+}
