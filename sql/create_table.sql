@@ -230,12 +230,23 @@ CREATE TABLE `user`
     `sex`         varchar(2) COLLATE utf8_bin   DEFAULT NULL COMMENT '性别',
     `id_number`   varchar(18) COLLATE utf8_bin  DEFAULT NULL COMMENT '身份证号',
     `avatar`      varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '头像',
+    `username`    varchar(32) COLLATE utf8_bin  DEFAULT NULL COMMENT '登录账号',
+    `password`    varchar(64) COLLATE utf8_bin  DEFAULT NULL COMMENT '登录密码(MD5)',
+    `status`      int                           DEFAULT '1' COMMENT '账号状态 0:禁用 1:启用',
     `create_time` datetime                      DEFAULT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_user_username` (`username`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 4
   DEFAULT CHARSET = utf8mb3
   COLLATE = utf8_bin COMMENT ='用户信息';
+
+# 新增 user 表账号密码字段（兼容已有库）
+ALTER TABLE `user`
+    ADD COLUMN `username` VARCHAR(32) COLLATE utf8_bin DEFAULT NULL COMMENT '登录账号' AFTER `avatar`,
+    ADD COLUMN `password` VARCHAR(64) COLLATE utf8_bin DEFAULT NULL COMMENT '登录密码(MD5)' AFTER `username`,
+    ADD COLUMN `status`   INT                          DEFAULT '1' COMMENT '账号状态 0:禁用 1:启用' AFTER `password`,
+    ADD UNIQUE KEY `idx_user_username` (`username`);
 
 # 消息去重表
 CREATE TABLE mq_consume_log

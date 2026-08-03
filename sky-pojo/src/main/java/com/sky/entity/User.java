@@ -37,6 +37,15 @@ public class User implements Serializable {
     //头像
     private String avatar;
 
+    //登录账号
+    private String username;
+
+    //登录密码(MD5)
+    private String password;
+
+    //账号状态 0:禁用 1:启用
+    private Integer status;
+
     //注册时间
     private LocalDateTime createTime;
 }

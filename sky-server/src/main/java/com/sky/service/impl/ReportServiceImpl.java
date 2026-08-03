@@ -182,8 +182,12 @@ public class ReportServiceImpl implements ReportService {
 
         List<Map<String,Object>> list=reportMapper.top10(ordersReportDTO);
 
-        list.sort((m1,m2)->{
-            return (int)((Long)m2.get("number") - (Long)m1.get("number"));
+        list.sort((m1, m2) -> {
+            // MySQL count(*) 在不同驱动/版本下可能返回 Long / BigInteger / Integer，
+            // 强转 (Long) 容易触发 ClassCastException → 500，这里统一用 Number 转 long
+            long n1 = ((Number) m1.get("number")).longValue();
+            long n2 = ((Number) m2.get("number")).longValue();
+            return Long.compare(n2, n1);
         });
 
         StringBuilder nameListStringBuilder = new StringBuilder();

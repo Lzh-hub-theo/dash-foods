@@ -223,22 +223,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    // TODO 后续可以尝试对for循环里面的查询改为单道查询
-    public PageResult listWithDetails(OrdersPageQueryDTO ordersPageQueryDTO) {
+        public PageResult listWithDetails(OrdersPageQueryDTO ordersPageQueryDTO) {
         PageHelper.startPage(ordersPageQueryDTO.getPage(), ordersPageQueryDTO.getPageSize());
 
-        //查询到部分的单
+        // 1) 查本页订单（1 次 SQL）
         List<Orders> list = orderMapper.list(ordersPageQueryDTO);
-
         Page<Orders> p = (Page<Orders>) list;
 
-        List<OrderVO> orderAndDetailVOList = new ArrayList<>();
+        // 2) 一次 in 查全部明细，再按 orderId group（替换原本的 N+1 循环）
+        List<Long> orderIds = list.stream().map(Orders::getId).collect(Collectors.toList());
+        Map<Long, List<OrderDetail>> detailsByOrderId = orderIds.isEmpty()
+                ? Collections.emptyMap()
+                : orderDetailMapper.listByOrderIds(orderIds).stream()
+                        .collect(Collectors.groupingBy(OrderDetail::getOrderId));
 
+        // 3) 装配 OrderVO
+        List<OrderVO> orderAndDetailVOList = new ArrayList<>(list.size());
         for (Orders order : list) {
             OrderVO obj = new OrderVO();
-            List<Long> ids = Arrays.asList(order.getId());
-
-            List<OrderDetail> orderDetailList = orderDetailMapper.listByOrderIds(ids);
+            List<OrderDetail> orderDetailList = detailsByOrderId.getOrDefault(order.getId(), Collections.emptyList());
 
             BeanUtils.copyProperties(order, obj);
             obj.setOrderDetailList(orderDetailList);

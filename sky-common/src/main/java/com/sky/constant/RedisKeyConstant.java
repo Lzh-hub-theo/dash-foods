@@ -13,4 +13,9 @@ public class RedisKeyConstant {
     public static final String DLQ_DEDUPLICATE_PREFIX_KEY = "dlq:deduplicate:";
     public static final String DLQ_RETRY_KEY = "dlq:retry:";
     public static final String ORDER_QUEUE_RETRY_KEY = "order_queue:retry:";
+
+    /**
+     * C端用户登录态黑名单（按 token 摘要存放，TTL 与 jwt 剩余寿命一致）
+     */
+    public static final String USER_TOKEN_BLACKLIST_PREFIX_KEY = "user:token:blacklist:";
 }
