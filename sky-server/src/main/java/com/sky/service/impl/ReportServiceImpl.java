@@ -193,12 +193,16 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder nameListStringBuilder = new StringBuilder();
         StringBuilder numberListStringBuilder = new StringBuilder();
 
-        for(Map<String,Object>map:list){
-            nameListStringBuilder.append(map.get("name")+",");
-            numberListStringBuilder.append(map.get("number")+",");
+        // 列表为空时短路，避免 deleteCharAt(-1) 抛 StringIndexOutOfBoundsException
+        if (!list.isEmpty()) {
+            for (Map<String, Object> map : list) {
+                nameListStringBuilder.append(map.get("name")).append(",");
+                numberListStringBuilder.append(map.get("number")).append(",");
+            }
+            // 用 length() - 1 比 lastIndexOf(",") 更稳
+            nameListStringBuilder.deleteCharAt(nameListStringBuilder.length() - 1);
+            numberListStringBuilder.deleteCharAt(numberListStringBuilder.length() - 1);
         }
-        nameListStringBuilder.deleteCharAt(nameListStringBuilder.lastIndexOf(","));
-        numberListStringBuilder.deleteCharAt(numberListStringBuilder.lastIndexOf(","));
 
         SalesTop10ReportVO salesTo10ReportVO = SalesTop10ReportVO.builder()
                 .nameList(nameListStringBuilder.toString())
