@@ -51,11 +51,10 @@ function pick(v: number) { emit('update:modelValue', v) }
 .tab:last-child { border-right: none; }
 .tab:hover { color: var(--ink); background: var(--paper-soft); }
 .tab--on {
-  color: var(--ink);
   background: var(--ink);
   color: var(--paper);
 }
 .tab--on .tab__count { color: var(--paper); }
-.tab__label { text-transform: uppercase; font-weight: 600; }
+.tab__label { text-transform: uppercase; font-weight: 500; }
 .tab__count { font-size: 13px; }
 </style>

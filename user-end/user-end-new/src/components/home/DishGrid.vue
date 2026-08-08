@@ -291,7 +291,7 @@ function onOpenFlavor(dish: DishVO, rect: DOMRect) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ffe9b8, #f2a65a);
+  background: #F4F5F7;
 }
 .sm-img .img-fallback span {
   font-family: var(--font-display);
@@ -490,12 +490,12 @@ function onOpenFlavor(dish: DishVO, rect: DOMRect) {
     background var(--dur-base) var(--ease-out),
     transform var(--dur-fast) var(--ease-out),
     box-shadow var(--dur-base) var(--ease-out);
-  box-shadow: 0 6px 16px -6px rgba(63, 107, 58, 0.5);
+  box-shadow: 0 6px 16px -6px rgba(71, 85, 105, 0.5);
 }
 .btn-add:hover {
   background: var(--color-sage-deep);
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px -8px rgba(63, 107, 58, 0.5);
+  box-shadow: 0 10px 20px -8px rgba(71, 85, 105, 0.5);
 }
 .btn-add:active {
   transform: translateY(0);

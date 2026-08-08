@@ -5,6 +5,20 @@ import StatusBadge from '@/components/layout/StatusBadge.vue'
 
 const shop = useShopStore()
 const open = computed(() => shop.isOpen)
+
+// 像素矩阵：0 空 / 1 墨 / 2 钢 / 3 弱灰
+const matrix: number[][] = [
+  [0, 0, 3, 0, 0, 0, 1, 0],
+  [0, 3, 0, 0, 2, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 3],
+  [1, 0, 0, 0, 0, 3, 0, 0],
+  [0, 0, 2, 0, 0, 0, 1, 0],
+  [0, 0, 0, 3, 0, 1, 0, 0],
+  [0, 2, 0, 0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 1, 0, 3, 0],
+  [3, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 2, 0, 0],
+]
 </script>
 
 <template>
@@ -12,11 +26,14 @@ const open = computed(() => shop.isOpen)
     <div class="container hero-inner">
       <!-- 左：标题区 -->
       <div class="hero-copy">
-        <p class="eyebrow stagger-item">TODAY&nbsp;·&nbsp;{{ new Date().getMonth() + 1 }}月{{ new Date().getDate() }}日&nbsp;·&nbsp;新一季菜单</p>
+        <p class="eyebrow stagger-item">
+          TODAY&nbsp;·&nbsp;{{ new Date().getMonth() + 1 }}月{{ new Date().getDate() }}日&nbsp;·&nbsp;新一季菜单
+        </p>
 
         <h1 class="hero-title">
+          <span class="pre"><span class="sq steel"></span>一卷给味蕾的素净白</span>
           <span class="line line-1">把<em>田野</em></span>
-          <span class="line line-2">装进便当盒</span>
+          <span class="line line-2">装进<span class="steel-word">便当</span>盒</span>
         </h1>
 
         <p class="hero-sub">
@@ -42,75 +59,35 @@ const open = computed(() => shop.isOpen)
         <div class="hero-cta">
           <a href="#menu" class="cta-primary">
             浏览今日菜单
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14" />
-              <path d="m13 6 6 6-6 6" />
-            </svg>
+            <span class="arr"></span>
           </a>
           <a href="#signature" class="cta-ghost">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />
-            </svg>
+            <span class="sq soft"></span>
             主厨今日推荐
           </a>
         </div>
       </div>
 
-      <!-- 右：手绘插画 + 卡片 -->
+      <!-- 右：像素矩阵装饰 -->
       <div class="hero-visual">
-        <div class="visual-bg">
-          <svg viewBox="0 0 480 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFFEFA" />
-                <stop offset="1" stop-color="#F4EFE4" />
-              </linearGradient>
-              <radialGradient id="glow" cx="50%" cy="40%" r="60%">
-                <stop offset="0" stop-color="#FFE9B8" stop-opacity="0.7" />
-                <stop offset="1" stop-color="#FFE9B8" stop-opacity="0" />
-              </radialGradient>
-            </defs>
-            <!-- 柔和光晕 -->
-            <ellipse cx="240" cy="220" rx="220" ry="220" fill="url(#glow)" />
-            <!-- 餐盘 -->
-            <ellipse cx="240" cy="280" rx="200" ry="60" fill="#E5DFD0" opacity="0.5" />
-            <circle cx="240" cy="240" r="190" fill="url(#plate)" stroke="#E5DFD0" stroke-width="1.5" />
-            <circle cx="240" cy="240" r="160" fill="none" stroke="#E5DFD0" stroke-dasharray="2 6" stroke-width="1" />
-            <!-- 主食沙拉：椭圆菜叶群 -->
-            <g transform="translate(240, 240)">
-              <ellipse cx="-50" cy="20" rx="60" ry="22" fill="#A4C49A" transform="rotate(-22 -50 20)" />
-              <ellipse cx="40" cy="-10" rx="55" ry="20" fill="#3F6B3A" transform="rotate(18 40 -10)" />
-              <ellipse cx="-20" cy="-40" rx="48" ry="18" fill="#708A4A" transform="rotate(-8 -20 -40)" />
-              <!-- 小番茄 -->
-              <circle cx="20" cy="40" r="16" fill="#D9534F" />
-              <circle cx="16" cy="36" r="4" fill="#FCEDEB" opacity="0.6" />
-              <circle cx="-50" cy="-50" r="14" fill="#F2A65A" />
-              <circle cx="-52" cy="-52" r="3" fill="#FFFEFA" opacity="0.7" />
-              <!-- 鸡蛋 -->
-              <ellipse cx="60" cy="50" rx="22" ry="18" fill="#FFFEFA" stroke="#E5DFD0" />
-              <circle cx="60" cy="50" r="10" fill="#F2A65A" />
-              <!-- 谷物 -->
-              <circle cx="80" cy="-40" r="3" fill="#E08838" />
-              <circle cx="92" cy="-30" r="3" fill="#E08838" />
-              <circle cx="84" cy="-26" r="3" fill="#E08838" />
-              <circle cx="-90" cy="0" r="3" fill="#E08838" />
-              <circle cx="-80" cy="10" r="3" fill="#E08838" />
-              <circle cx="-100" cy="-10" r="3" fill="#E08838" />
-              <!-- 顶部小叶子 -->
-              <path d="M -10 -90 C 0 -110, 30 -110, 40 -90 C 30 -100, 0 -100, -10 -90 Z" fill="#3F6B3A" />
-            </g>
-            <!-- 飞溅的鼠尾草叶 -->
-            <g transform="translate(70, 90)" opacity="0.8">
-              <path d="M0 0 C 8 -10, 26 -10, 30 0 C 26 -2, 8 -2, 0 0 Z" fill="#3F6B3A" />
-              <path d="M2 4 L 28 4" stroke="#3F6B3A" stroke-width="1" />
-            </g>
-            <g transform="translate(390, 80)" opacity="0.7">
-              <path d="M0 0 C 8 -10, 26 -10, 30 0 C 26 -2, 8 -2, 0 0 Z" fill="#3F6B3A" />
-            </g>
-            <g transform="translate(420, 460)" opacity="0.85">
-              <path d="M0 0 C 8 -10, 26 -10, 30 0 C 26 -2, 8 -2, 0 0 Z" fill="#3F6B3A" />
-            </g>
-          </svg>
+        <div class="visual-frame">
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+          <div class="matrix">
+            <template v-for="(row, ri) in matrix" :key="ri">
+              <i
+                v-for="(cell, ci) in row"
+                :key="ci"
+                :class="{ ink: cell === 1, steel: cell === 2, soft: cell === 3 }"
+              ></i>
+            </template>
+          </div>
+          <div class="visual-cap">
+            <span class="vc-label">PIXEL · MENU</span>
+            <span class="vc-mono">8PX GRID · #FFFFFF</span>
+          </div>
         </div>
 
         <!-- 漂浮信息卡 -->
@@ -121,7 +98,7 @@ const open = computed(() => shop.isOpen)
         </div>
         <div class="float-card float-card-2">
           <div class="fc-rating">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#F2A65A"><path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <span class="sq steel"></span>
             <span>4.9</span>
           </div>
           <span class="fc-name">2,488&nbsp;位食客推荐</span>
@@ -134,16 +111,8 @@ const open = computed(() => shop.isOpen)
 <style scoped>
 .hero {
   position: relative;
-  padding: 72px 0 56px;
+  padding: 96px 0 72px;
   overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-leaf);
-  pointer-events: none;
-  opacity: 0.7;
 }
 .hero-inner {
   position: relative;
@@ -158,23 +127,48 @@ const open = computed(() => shop.isOpen)
 }
 
 .eyebrow {
+  font-family: var(--font-pix);
   font-size: var(--fs-12);
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  color: var(--color-sage);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--color-steel);
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   animation: fade-up 480ms var(--ease-out) both;
   animation-delay: 40ms;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-steel);
+  display: inline-block;
 }
 
 .hero-title {
   margin: 22px 0 24px;
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(56px, 7.4vw, 96px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.025em;
   color: var(--color-ink);
+}
+.hero-title .pre {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-ink-3);
+  font-size: 20px;
+  margin-bottom: 18px;
+  animation: fade-up 480ms var(--ease-out) both;
+  animation-delay: 60ms;
+}
+.hero-title .pre .sq {
+  margin-right: 10px;
 }
 .hero-title .line {
   display: block;
@@ -187,23 +181,16 @@ const open = computed(() => shop.isOpen)
 .hero-title .line-2 {
   animation: line-rise 720ms var(--ease-out) both;
   animation-delay: 180ms;
-  color: var(--color-sage-deep);
 }
 .hero-title em {
   font-style: italic;
-  color: var(--color-sage);
-  position: relative;
+  font-weight: 400;
+  color: var(--color-ink);
 }
-.hero-title em::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.08em;
-  height: 0.16em;
-  background: var(--color-butter);
-  border-radius: 4px;
-  z-index: -1;
+.hero-title .steel-word {
+  color: var(--color-steel);
+  font-style: italic;
+  font-weight: 400;
 }
 @keyframes line-rise {
   from {
@@ -215,8 +202,8 @@ const open = computed(() => shop.isOpen)
 }
 
 .hero-sub {
-  font-size: var(--fs-17);
-  line-height: 1.65;
+  font-size: var(--fs-17, 17px);
+  line-height: 1.8;
   color: var(--color-ink-soft);
   max-width: 520px;
   animation: fade-up 600ms var(--ease-out) both;
@@ -224,7 +211,7 @@ const open = computed(() => shop.isOpen)
 }
 .hero-sub .underline {
   position: relative;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-ink);
 }
 .hero-sub .underline::after {
@@ -234,8 +221,7 @@ const open = computed(() => shop.isOpen)
   right: 0;
   bottom: -2px;
   height: 2px;
-  background: var(--color-sage);
-  border-radius: 2px;
+  background: var(--color-steel);
 }
 
 .hero-meta {
@@ -246,7 +232,7 @@ const open = computed(() => shop.isOpen)
   padding: 14px 22px;
   background: var(--color-paper);
   border: 1px solid var(--color-line);
-  border-radius: var(--radius-pill);
+  border-radius: 0;
   box-shadow: var(--shadow-soft);
   animation: fade-up 600ms var(--ease-out) both;
   animation-delay: 400ms;
@@ -264,13 +250,14 @@ const open = computed(() => shop.isOpen)
 }
 .meta-text em {
   font-style: normal;
+  font-family: var(--font-pix);
   font-size: 10px;
   letter-spacing: 0.2em;
   color: var(--color-ink-mute);
   text-transform: uppercase;
 }
 .meta-text strong {
-  font-weight: 600;
+  font-weight: 500;
   font-family: var(--font-display);
   color: var(--color-ink);
 }
@@ -278,121 +265,172 @@ const open = computed(() => shop.isOpen)
 .hero-cta {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 36px;
+  gap: 16px;
+  margin-top: 40px;
   animation: fade-up 600ms var(--ease-out) both;
   animation-delay: 500ms;
 }
-.cta-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 28px;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-15);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  transition:
-    transform var(--dur-base) var(--ease-out),
-    background var(--dur-base) var(--ease-out),
-    box-shadow var(--dur-base) var(--ease-out);
-}
-.cta-primary:hover {
-  background: var(--color-sage-deep);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px -10px rgba(47, 82, 48, 0.4);
-}
+.cta-primary,
 .cta-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 22px;
-  color: var(--color-ink);
+  font-family: var(--font-display);
   font-size: var(--fs-15);
   font-weight: 500;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-line);
-  background: var(--color-paper);
-  transition: border-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 24px;
+  border: 1px solid var(--color-ink);
+  transition: all 0.22s var(--ease-out);
+  position: relative;
+}
+.cta-primary {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+.cta-primary::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-bg);
+  display: inline-block;
+}
+.cta-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -8px rgba(10, 10, 10, 0.35);
+}
+.cta-ghost {
+  background: transparent;
+  color: var(--color-ink);
+}
+.cta-ghost::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-ink);
+  display: inline-block;
 }
 .cta-ghost:hover {
-  border-color: var(--color-sage);
-  color: var(--color-sage-deep);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -8px rgba(10, 10, 10, 0.22);
+}
+.cta-primary .arr {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 2px;
 }
 
-/* —— 右：插画 —— */
+/* —— 右：像素矩阵装饰 —— */
 .hero-visual {
   position: relative;
-  aspect-ratio: 1 / 1.1;
+  aspect-ratio: 1 / 1;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.visual-bg {
+.visual-frame {
+  position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 30px 60px rgba(63, 107, 58, 0.18));
   animation: fade-in 800ms var(--ease-out) both;
   animation-delay: 200ms;
 }
-.visual-bg svg {
-  width: 90%;
-  height: auto;
-  max-width: 520px;
+.matrix {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  width: 70%;
+}
+.matrix i {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--color-line-soft);
+  display: block;
+}
+.matrix i.ink {
+  background: var(--color-ink);
+}
+.matrix i.steel {
+  background: var(--color-steel);
+}
+.matrix i.soft {
+  background: var(--color-ink-4);
+}
+.visual-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-3);
+}
+.vc-label {
+  font-family: var(--font-pix);
+  letter-spacing: 0.14em;
 }
 
 .float-card {
   position: absolute;
   background: var(--color-paper);
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
+  border-radius: 0;
+  padding: 14px 18px;
   box-shadow: var(--shadow-card);
-  border: 1px solid var(--color-line-soft);
+  border: 1px solid var(--color-line);
   display: flex;
   flex-direction: column;
   gap: 4px;
   animation: fade-up 600ms var(--ease-out) both;
 }
 .float-card-1 {
-  top: 12%;
-  left: 4%;
+  top: 6%;
+  left: -3%;
   animation-delay: 600ms;
 }
 .float-card-2 {
-  bottom: 14%;
-  right: 6%;
+  bottom: 8%;
+  right: -3%;
   animation-delay: 700ms;
 }
 .fc-eyebrow {
+  font-family: var(--font-pix);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  color: var(--color-sage);
+  letter-spacing: 0.18em;
+  color: var(--color-steel);
+  text-transform: uppercase;
 }
 .fc-name {
   font-family: var(--font-display);
   font-size: var(--fs-18);
   font-weight: 500;
+  font-style: italic;
   color: var(--color-ink);
 }
 .fc-meta {
-  font-size: var(--fs-12);
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--color-ink-mute);
-  letter-spacing: 0.04em;
 }
 .fc-rating {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-family: var(--font-display);
   font-size: var(--fs-18);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-ink);
   margin-bottom: 2px;
 }
@@ -407,8 +445,8 @@ const open = computed(() => shop.isOpen)
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .hero-visual {
-    aspect-ratio: 4 / 3;
+  .visual-frame {
+    max-width: 380px;
   }
 }
 </style>

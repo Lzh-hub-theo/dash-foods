@@ -245,48 +245,84 @@ onMounted(load)
 </template>
 
 <style scoped>
-.emps { display: flex; flex-direction: column; gap: 16px; }
+.emps { display: flex; flex-direction: column; gap: 18px; }
 .emps__head {
   display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
+  padding-top: 4px;
 }
-.emps__head-l { display: flex; flex-direction: column; gap: 6px; }
+.emps__head-l { display: flex; flex-direction: column; gap: 8px; }
+.emps__head-l .dateline {
+  font-family: var(--font-pix);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
 .emps__head-r { display: flex; gap: 10px; }
-.emps__title { font-size: 38px; font-weight: 900; letter-spacing: -0.025em; line-height: 1; }
+.emps__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 48px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
 
 .emps__filters {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 12px; align-items: end;
-  padding-bottom: 12px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--rule);
 }
 .filter { display: flex; flex-direction: column; gap: 4px; }
+.filter :deep(.dateline) {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
 .filter--wide { min-width: 240px; }
 .filter__actions { display: flex; gap: 8px; }
 
 .emps__table-wrap { min-height: 320px; }
 .emps__loading {
   padding: 80px 0; text-align: center;
+  font-family: var(--font-pix);
+  font-size: 11px;
   letter-spacing: 0.22em; color: var(--ink-muted);
 }
 .t-right { text-align: right; }
 .emps__user { font-size: 12px; color: var(--ink-muted); }
-.emps__name { font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+.emps__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 15px;
+}
 .emps__time { font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
 .actions { display: inline-flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
 
 .emps__pager {
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 12px; letter-spacing: 0.18em; color: var(--ink-muted);
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.18em; color: var(--ink-muted);
   text-transform: uppercase; padding-top: 8px;
-  border-top: 1px solid var(--rule-faint);
+  border-top: 1px solid var(--rule-soft);
 }
 .pager__btns { display: flex; gap: 6px; }
 
 .form { display: flex; flex-direction: column; gap: 12px; }
 .field { display: flex; flex-direction: column; gap: 6px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.field__label { color: var(--ink-muted); }
+.field__label {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
 
 @media (max-width: 900px) {
   .emps__tbl { font-size: 12px; }

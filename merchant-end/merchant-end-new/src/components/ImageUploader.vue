@@ -100,7 +100,7 @@ function clear() {
   width: 100%;
   aspect-ratio: 4 / 3;
   background: var(--paper-deep);
-  border: 2px dashed var(--rule-soft);
+  border: 1px dashed var(--rule);
   overflow: hidden;
   cursor: pointer;
   transition: border-color 0.18s var(--ease), background 0.18s var(--ease);
@@ -113,11 +113,11 @@ function clear() {
 .up__mask {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(20,17,15,0.55); color: var(--paper);
+  background: rgba(10, 10, 10, 0.5); color: var(--paper);
   opacity: 0; transition: opacity 0.18s var(--ease);
 }
 .up:hover .up__mask { opacity: 1; }
-.up__hint { font-size: 11px; letter-spacing: 0.22em; }
+.up__hint { font-family: var(--font-pix); font-size: 10px; letter-spacing: 0.22em; }
 
 .up__placeholder {
   position: absolute; inset: 0;
@@ -126,14 +126,14 @@ function clear() {
   color: var(--ink-muted);
   text-align: center;
 }
-.up__plus { font-size: 56px; line-height: 1; color: var(--ink-soft); font-weight: 900; }
-.up__label { font-size: 12px; letter-spacing: 0.22em; color: var(--ink); }
+.up__plus { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 56px; line-height: 1; color: var(--ink-faint); }
+.up__label { font-family: var(--font-pix); font-size: 11px; letter-spacing: 0.22em; color: var(--ink); }
 .up__sub { font-size: 10px; letter-spacing: 0.18em; }
 
 .up__loading {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(246, 241, 228, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   color: var(--ink);
   letter-spacing: 0.22em;
   font-size: 11px;

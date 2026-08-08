@@ -1,69 +1,48 @@
 /* ============================================================
    DASH FOODS · 商家台  Design Tokens
-   风格：Newspaper / 编辑感
-   - 奶白纸感底，厚重墨黑骨架，鲜红作头条强调
-   - 衬线大标题（Fraunces）+ 正文 IBM Plex Sans + 等宽 IBM Plex Mono（数据）
+   风格：净白像素 · Quiet White Pixels
+   - 纯白主底，发丝线分层，钢灰青作唯一冷点缀
+   - 衬线承文气（Fraunces / Noto Serif SC），像素字守节拍（Silkscreen），等宽记数据（JetBrains Mono）
+   - 三阶白 · 三阶墨 · 一抹冷钢 · 无红
    ============================================================ */
 :root {
-  /* Paper & ink */
-  --paper: #F6F1E4;          /* 报纸纸基，米黄 */
-  --paper-deep: #EDE5D2;     /* 略深一档用于卡片背景 */
-  --paper-soft: #FBF7EC;     /* 略浅一档用于 hover/highlight */
-  --ink: #14110F;            /* 厚重墨黑 */
-  --ink-soft: #2B2622;       /* 次级墨黑 */
-  --ink-muted: #6B6357;      /* 灰墨，注释 */
-  --ink-faint: #9C9384;      /* 极淡灰墨，placeholder/分割线文字 */
+  /* Paper & ink —— 三阶白 + 三阶墨 */
+  --paper: #FFFFFF;          /* 主底 · 纯净白 */
+  --paper-deep: #FAFAFB;     /* 卡片 · 微凹白 */
+  --paper-soft: #F4F5F7;     /* 凹陷灰白 · hover/recess */
+  --ink: #0A0A0A;            /* 浓墨 */
+  --ink-soft: #374151;       /* 次墨（冷灰） */
+  --ink-muted: #6B7280;      /* 灰墨 · 注释 */
+  --ink-faint: #9CA3AF;      /* 弱灰 · placeholder/极淡 */
 
-  /* Accents — 像杂志版的头条红和副刊蓝 */
-  --signal: #C8341C;         /* 头条红 */
-  --signal-soft: rgba(200, 52, 28, 0.12);
-  --press: #1A3A5C;          /* 副刊深蓝 */
-  --press-soft: rgba(26, 58, 92, 0.10);
-  --olive: #4F5B3A;          /* 鼠尾草绿，用于营业中 */
-  --olive-soft: rgba(79, 91, 58, 0.12);
-  --amber: #B4791A;          /* 暖琥珀，用于待办/警告 */
-  --amber-soft: rgba(180, 121, 26, 0.14);
+  /* Accents —— 仅冷色，无红；以钢灰青为唯一点缀 */
+  --signal: #475569;         /* 钢灰青 · 主点缀 */
+  --signal-soft: rgba(71, 85, 105, 0.12);
+  --press: #334155;          /* 深钢 */
+  --press-soft: rgba(51, 65, 85, 0.10);
+  --olive: #0A0A0A;          /* 完成/营业中 → 浓墨（沉稳收束） */
+  --olive-soft: rgba(10, 10, 10, 0.08);
+  --amber: #6B7280;          /* 待支付/警告 → 灰墨（弱化） */
+  --amber-soft: rgba(107, 114, 128, 0.12);
 
-  /* Borders */
-  --rule: #14110F;           /* 主分割线（粗墨线） */
-  --rule-soft: #C9C0AC;      /* 次分割线 */
-  --rule-faint: #DDD5BF;     /* 最淡分割线 */
+  /* Borders —— 发丝线，越细越冷静 */
+  --rule: #E5E7EB;           /* 主发丝线 */
+  --rule-soft: #EEF0F3;      /* 淡发丝 */
+  --rule-faint: #EEF0F3;     /* 最淡发丝 */
 
   /* Type */
   --font-display: 'Fraunces', 'Noto Serif SC', Georgia, serif;
   --font-serif: 'Fraunces', 'Noto Serif SC', Georgia, serif;
-  --font-sans: 'IBM Plex Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Consolas', monospace;
+  --font-sans: 'Fraunces', 'Noto Serif SC', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  --font-pix: 'Silkscreen', 'JetBrains Mono', monospace;   /* 像素字 · 标签/编号 */
 
   /* Sizing */
   --sidebar-w: 252px;
   --topbar-h: 64px;
   --max-content: 1440px;
+  --g: 8px;                  /* 8px 像素网格 */
 
   /* Motion */
-  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@media (prefers-color-scheme: dark) {
-  /* 报纸也有"夜读"模式：黑底奶字 */
-  :root {
-    --paper: #14110F;
-    --paper-deep: #1C1815;
-    --paper-soft: #221C18;
-    --ink: #F6F1E4;
-    --ink-soft: #DDD5BF;
-    --ink-muted: #9C9384;
-    --ink-faint: #6B6357;
-    --signal: #E55A45;
-    --signal-soft: rgba(229, 90, 69, 0.18);
-    --press: #7CA8D6;
-    --press-soft: rgba(124, 168, 214, 0.18);
-    --olive: #A8B57C;
-    --olive-soft: rgba(168, 181, 124, 0.18);
-    --amber: #E2B86A;
-    --amber-soft: rgba(226, 184, 106, 0.18);
-    --rule: #F6F1E4;
-    --rule-soft: #4A423A;
-    --rule-faint: #2B2622;
-  }
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }

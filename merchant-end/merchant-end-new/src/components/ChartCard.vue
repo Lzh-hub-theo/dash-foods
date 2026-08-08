@@ -79,13 +79,15 @@ const style = computed(() => ({ height: props.height, width: '100%' }))
 <style scoped>
 .card {
   background: var(--paper);
-  border: 1px solid var(--rule-soft);
+  border: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
   min-width: 0;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
 }
+.card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -14px rgba(10, 10, 10, 0.14); border-color: var(--ink); }
 .card__head {
-  padding: 14px 18px 8px;
+  padding: 16px 20px 8px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -93,7 +95,7 @@ const style = computed(() => ({ height: props.height, width: '100%' }))
 .card__section { color: var(--ink-muted); }
 .card__title {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 22px;
   line-height: 1.1;
   letter-spacing: -0.01em;

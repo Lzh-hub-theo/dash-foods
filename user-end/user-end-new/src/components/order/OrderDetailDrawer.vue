@@ -353,7 +353,7 @@ const totalDishes = computed(() =>
 .od-mask {
   position: fixed;
   inset: 0;
-  background: rgba(31, 42, 29, 0.32);
+  background: rgba(10, 10, 10, 0.32);
   backdrop-filter: blur(2px);
   z-index: 70;
 }
@@ -368,7 +368,7 @@ const totalDishes = computed(() =>
   z-index: 71;
   display: flex;
   flex-direction: column;
-  box-shadow: -32px 0 64px -16px rgba(31, 42, 29, 0.25);
+  box-shadow: -32px 0 64px -16px rgba(10, 10, 10, 0.25);
   border-left: 1px solid var(--color-line);
 }
 
@@ -413,18 +413,18 @@ const totalDishes = computed(() =>
 .od-status {
   padding: 24px 28px;
   background:
-    radial-gradient(circle at 0% 0%, rgba(164, 196, 154, 0.18), transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(156, 163, 175, 0.18), transparent 50%),
     var(--color-paper);
   border-bottom: 1px solid var(--color-line-soft);
 }
 .od-status.is-done {
   background:
-    radial-gradient(circle at 0% 0%, rgba(255, 233, 184, 0.4), transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(244, 245, 247, 0.4), transparent 50%),
     var(--color-paper);
 }
 .od-status.is-cancel {
   background:
-    radial-gradient(circle at 0% 0%, rgba(217, 83, 79, 0.12), transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(51, 65, 85, 0.12), transparent 50%),
     var(--color-paper);
 }
 .status-row {
@@ -539,7 +539,7 @@ const totalDishes = computed(() =>
   background: var(--color-apricot);
   border-color: var(--color-apricot);
   transform: scale(1.3);
-  box-shadow: 0 0 0 4px rgba(242, 166, 90, 0.18);
+  box-shadow: 0 0 0 4px rgba(71, 85, 105, 0.18);
 }
 .step-item.is-end .step-dot {
   background: var(--color-cream-soft);

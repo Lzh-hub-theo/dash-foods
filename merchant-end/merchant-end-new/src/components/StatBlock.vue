@@ -24,20 +24,22 @@ defineProps<{
 
 <style scoped>
 .stat {
-  padding: 18px 20px 22px;
-  border: 1px solid var(--rule-soft);
-  background: var(--paper-deep);
+  padding: 20px 22px 24px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
   min-height: 132px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
 }
+.stat:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -14px rgba(10, 10, 10, 0.14); border-color: var(--ink); }
 .stat::before {
   content: '';
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 4px;
+  height: 2px;
   background: var(--ink);
 }
 .stat[data-accent='signal']::before { background: var(--signal); }
@@ -51,15 +53,19 @@ defineProps<{
   gap: 10px;
 }
 .stat__value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
   font-size: 44px;
   line-height: 1;
-  font-weight: 900;
+  letter-spacing: -0.02em;
 }
 .stat__unit {
+  font-family: var(--font-mono);
   font-size: 13px;
   color: var(--ink-muted);
   letter-spacing: 0.1em;
 }
-.stat__skeleton { font-size: 36px; color: var(--ink-faint); }
-.stat__hint { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+.stat__skeleton { font-family: var(--font-mono); font-size: 36px; color: var(--ink-faint); }
+.stat__hint { font-family: var(--font-pix); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.16em; text-transform: uppercase; }
 </style>

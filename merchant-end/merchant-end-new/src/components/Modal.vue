@@ -45,24 +45,24 @@ watch(() => props.open, (v) => {
 .m-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(20,17,15,0.55);
+  background: rgba(10, 10, 10, 0.45);
   z-index: 9000;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding: 60px 20px;
   overflow-y: auto;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
 }
 .m-dialog {
   width: 100%;
   background: var(--paper);
-  border: 2px solid var(--ink);
-  box-shadow: 10px 10px 0 var(--ink);
-  animation: m-pop .2s var(--ease);
+  border: 1px solid var(--rule);
+  box-shadow: 0 24px 48px -16px rgba(10, 10, 10, 0.28);
+  animation: m-pop .25s var(--ease);
 }
 @keyframes m-pop {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .m-head {
@@ -71,13 +71,15 @@ watch(() => props.open, (v) => {
   justify-content: space-between;
   padding: 18px 24px;
 }
-.m-title { font-size: 24px; font-weight: 800; }
+.m-title { font-size: 24px; font-weight: 400; font-style: italic; }
 .m-x {
-  font-size: 11px;
+  font-family: var(--font-pix);
+  font-size: 10px;
   letter-spacing: 0.18em;
   color: var(--ink-muted);
-  border: 1px solid var(--rule-soft);
+  border: 1px solid var(--rule);
   padding: 6px 10px;
+  transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
 }
 .m-x:hover { color: var(--ink); border-color: var(--ink); }
 .m-body { padding: 20px 24px; }

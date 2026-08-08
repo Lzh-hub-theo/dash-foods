@@ -9,9 +9,9 @@ import EmptyState from '@/components/EmptyState.vue'
 
 const store = useReportStore()
 
-// 报纸感图表主题：奶白底 + 墨黑线 + 信号红/橄榄/副刊蓝
+// 净白像素图表主题：纯白底 + 墨黑线 + 钢灰青冷点缀
 const FONT = '"Fraunces", "Noto Serif SC", serif'
-const MONO = '"IBM Plex Mono", monospace'
+const MONO = '"JetBrains Mono", monospace'
 
 const turnoverOption = computed(() => {
   const { dates, values } = store.turnoverChart
@@ -19,9 +19,9 @@ const turnoverOption = computed(() => {
     grid: { left: 50, right: 24, top: 36, bottom: 36 },
     tooltip: {
       trigger: 'axis',
-      backgroundColor: '#14110F',
-      borderColor: '#14110F',
-      textStyle: { color: '#F6F1E4', fontFamily: MONO, fontSize: 12 },
+      backgroundColor: '#0A0A0A',
+      borderColor: '#0A0A0A',
+      textStyle: { color: '#FFFFFF', fontFamily: MONO, fontSize: 12 },
       formatter: (params: { axisValueLabel: string; value: number }[]) => {
         const p = params[0]
         return `${p.axisValueLabel}<br/><b>¥ ${Number(p.value).toFixed(2)}</b>`
@@ -30,16 +30,16 @@ const turnoverOption = computed(() => {
     xAxis: {
       type: 'category',
       data: dates,
-      axisLine: { lineStyle: { color: '#14110F', width: 1 } },
+      axisLine: { lineStyle: { color: '#0A0A0A', width: 1 } },
       axisTick: { show: false },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11 },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11 },
     },
     yAxis: {
       type: 'value',
       axisLine: { show: false },
       axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#DDD5BF', type: 'dashed' } },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11, formatter: (v: number) => `¥${v}` },
+      splitLine: { lineStyle: { color: '#EEF0F3', type: 'dashed' } },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11, formatter: (v: number) => `¥${v}` },
     },
     series: [{
       type: 'line',
@@ -48,14 +48,14 @@ const turnoverOption = computed(() => {
       smooth: true,
       symbol: 'circle',
       symbolSize: 6,
-      lineStyle: { color: '#C8341C', width: 2.5 },
-      itemStyle: { color: '#C8341C', borderColor: '#F6F1E4', borderWidth: 2 },
+      lineStyle: { color: '#475569', width: 2.5 },
+      itemStyle: { color: '#475569', borderColor: '#FFFFFF', borderWidth: 2 },
       areaStyle: {
         color: {
           type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
           colorStops: [
-            { offset: 0, color: 'rgba(200, 52, 28, 0.18)' },
-            { offset: 1, color: 'rgba(200, 52, 28, 0)' },
+            { offset: 0, color: 'rgba(71, 85, 105, 0.18)' },
+            { offset: 1, color: 'rgba(71, 85, 105, 0)' },
           ],
         },
       },
@@ -69,39 +69,39 @@ const userOption = computed(() => {
     grid: { left: 50, right: 24, top: 56, bottom: 36 },
     legend: {
       top: 8, right: 4,
-      textStyle: { color: '#2B2622', fontFamily: MONO, fontSize: 11 },
+      textStyle: { color: '#374151', fontFamily: MONO, fontSize: 11 },
       icon: 'rect',
       itemWidth: 12, itemHeight: 8,
     },
     tooltip: {
       trigger: 'axis',
-      backgroundColor: '#14110F', borderColor: '#14110F',
-      textStyle: { color: '#F6F1E4', fontFamily: MONO, fontSize: 12 },
+      backgroundColor: '#0A0A0A', borderColor: '#0A0A0A',
+      textStyle: { color: '#FFFFFF', fontFamily: MONO, fontSize: 12 },
     },
     xAxis: {
       type: 'category', data: dates,
-      axisLine: { lineStyle: { color: '#14110F' } },
+      axisLine: { lineStyle: { color: '#0A0A0A' } },
       axisTick: { show: false },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11 },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11 },
     },
     yAxis: {
       type: 'value',
       axisLine: { show: false }, axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#DDD5BF', type: 'dashed' } },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11 },
+      splitLine: { lineStyle: { color: '#EEF0F3', type: 'dashed' } },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11 },
     },
     series: [
       {
         type: 'line', name: '新增用户', data: newUsers,
         smooth: true, symbol: 'circle', symbolSize: 5,
-        lineStyle: { color: '#C8341C', width: 2 },
-        itemStyle: { color: '#C8341C' },
+        lineStyle: { color: '#475569', width: 2 },
+        itemStyle: { color: '#475569' },
       },
       {
         type: 'line', name: '用户总量', data: totalUsers,
         smooth: true, symbol: 'circle', symbolSize: 5,
-        lineStyle: { color: '#1A3A5C', width: 2 },
-        itemStyle: { color: '#1A3A5C' },
+        lineStyle: { color: '#334155', width: 2 },
+        itemStyle: { color: '#334155' },
       },
     ],
   }
@@ -113,36 +113,36 @@ const orderOption = computed(() => {
     grid: { left: 50, right: 24, top: 56, bottom: 36 },
     legend: {
       top: 8, right: 4,
-      textStyle: { color: '#2B2622', fontFamily: MONO, fontSize: 11 },
+      textStyle: { color: '#374151', fontFamily: MONO, fontSize: 11 },
       icon: 'rect', itemWidth: 12, itemHeight: 8,
     },
     tooltip: {
       trigger: 'axis',
-      backgroundColor: '#14110F', borderColor: '#14110F',
-      textStyle: { color: '#F6F1E4', fontFamily: MONO, fontSize: 12 },
+      backgroundColor: '#0A0A0A', borderColor: '#0A0A0A',
+      textStyle: { color: '#FFFFFF', fontFamily: MONO, fontSize: 12 },
     },
     xAxis: {
       type: 'category', data: dates,
-      axisLine: { lineStyle: { color: '#14110F' } },
+      axisLine: { lineStyle: { color: '#0A0A0A' } },
       axisTick: { show: false },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11 },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11 },
     },
     yAxis: {
       type: 'value',
       axisLine: { show: false }, axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#DDD5BF', type: 'dashed' } },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11 },
+      splitLine: { lineStyle: { color: '#EEF0F3', type: 'dashed' } },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11 },
     },
     series: [
       {
         type: 'bar', name: '总订单', data: total,
         barMaxWidth: 14,
-        itemStyle: { color: '#1A3A5C' },
+        itemStyle: { color: '#334155' },
       },
       {
         type: 'bar', name: '有效订单', data: valid,
         barMaxWidth: 14,
-        itemStyle: { color: '#4F5B3A' },
+        itemStyle: { color: '#475569' },
       },
     ],
   }
@@ -158,29 +158,29 @@ const top10Option = computed(() => {
     tooltip: {
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
-      backgroundColor: '#14110F', borderColor: '#14110F',
-      textStyle: { color: '#F6F1E4', fontFamily: MONO, fontSize: 12 },
+      backgroundColor: '#0A0A0A', borderColor: '#0A0A0A',
+      textStyle: { color: '#FFFFFF', fontFamily: MONO, fontSize: 12 },
     },
     xAxis: {
       type: 'value',
       axisLine: { show: false }, axisTick: { show: false },
-      splitLine: { lineStyle: { color: '#DDD5BF', type: 'dashed' } },
-      axisLabel: { color: '#6B6357', fontFamily: MONO, fontSize: 11 },
+      splitLine: { lineStyle: { color: '#EEF0F3', type: 'dashed' } },
+      axisLabel: { color: '#6B7280', fontFamily: MONO, fontSize: 11 },
     },
     yAxis: {
       type: 'category', data: revNames,
-      axisLine: { lineStyle: { color: '#14110F' } },
+      axisLine: { lineStyle: { color: '#0A0A0A' } },
       axisTick: { show: false },
-      axisLabel: { color: '#14110F', fontFamily: FONT, fontSize: 13, fontWeight: 600 },
+      axisLabel: { color: '#0A0A0A', fontFamily: FONT, fontSize: 13, fontWeight: 400 },
     },
     series: [{
       type: 'bar', name: '销量',
       data: revCounts,
       barMaxWidth: 18,
-      itemStyle: { color: '#C8341C' },
+      itemStyle: { color: '#475569' },
       label: {
         show: true, position: 'right',
-        color: '#14110F', fontFamily: MONO, fontSize: 11,
+        color: '#0A0A0A', fontFamily: MONO, fontSize: 11,
         formatter: (p: { value: number }) => `${p.value}`,
       },
     }],
@@ -393,7 +393,7 @@ onMounted(() => {
   display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
 }
 .reports__head-l { display: flex; flex-direction: column; gap: 6px; }
-.reports__title { font-size: 38px; font-weight: 900; letter-spacing: -0.025em; line-height: 1; }
+.reports__title { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 38px; letter-spacing: -0.02em; line-height: 1; }
 
 /* 筛选条 */
 .reports__filters {
@@ -423,7 +423,7 @@ onMounted(() => {
 }
 .reports__sec-title {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 18px;
   letter-spacing: -0.01em;
   margin: 0;
@@ -443,28 +443,32 @@ onMounted(() => {
   gap: 14px;
 }
 .reports__sum-cell {
-  padding: 16px 18px;
-  background: var(--paper-deep);
-  border: 1px solid var(--rule-soft);
-  border-top: 4px solid var(--ink);
+  padding: 18px 20px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--ink);
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
 }
+.reports__sum-cell:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -14px rgba(10, 10, 10, 0.14); border-color: var(--ink); }
 .reports__sum-cell:nth-child(2) { border-top-color: var(--olive); }
 .reports__sum-cell:nth-child(3) { border-top-color: var(--press); }
 .reports__sum-cell:nth-child(4) { border-top-color: var(--amber); }
 .reports__sum-label { color: var(--ink-muted); }
 .reports__sum-value {
   font-family: var(--font-display);
-  font-weight: 900;
+  font-style: italic;
+  font-weight: 300;
   font-size: 30px;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 .reports__sum-range {
+  font-family: var(--font-mono);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.04em;
 }
 

@@ -227,10 +227,10 @@ function goHome() {
         <div v-else-if="!filtered.length" class="empty">
           <div class="empty-illus">
             <svg viewBox="0 0 140 140" fill="none">
-              <circle cx="70" cy="70" r="60" stroke="#E5DFD0" stroke-width="1.5" stroke-dasharray="3 4" />
-              <path d="M50 70 L 90 70" stroke="#A4C49A" stroke-width="2" stroke-linecap="round" />
-              <path d="M70 50 L 70 90" stroke="#A4C49A" stroke-width="2" stroke-linecap="round" />
-              <circle cx="70" cy="70" r="6" fill="#A4C49A" />
+              <circle cx="70" cy="70" r="60" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="3 4" />
+              <path d="M50 70 L 90 70" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" />
+              <path d="M70 50 L 70 90" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" />
+              <circle cx="70" cy="70" r="6" fill="#9CA3AF" />
             </svg>
           </div>
           <p class="empty-title">还没有订单</p>
@@ -591,7 +591,7 @@ function goHome() {
 .oc-progress-dot.is-active {
   background: var(--color-apricot);
   transform: scale(1.4);
-  box-shadow: 0 0 0 4px rgba(242, 166, 90, 0.18);
+  box-shadow: 0 0 0 4px rgba(71, 85, 105, 0.18);
 }
 .oc-progress-text {
   margin-left: 6px;

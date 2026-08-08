@@ -95,11 +95,11 @@ function pickAddress(a: AddressBook) {
             <svg viewBox="0 0 140 140" fill="none">
               <path
                 d="M70 20 C 45 20 30 40 30 60 C 30 80 70 115 70 115 C 70 115 110 80 110 60 C 110 40 95 20 70 20 Z"
-                stroke="#A4C49A"
+                stroke="#9CA3AF"
                 stroke-width="1.5"
                 stroke-dasharray="3 4"
               />
-              <circle cx="70" cy="60" r="10" fill="none" stroke="#A4C49A" stroke-width="1.5" />
+              <circle cx="70" cy="60" r="10" fill="none" stroke="#9CA3AF" stroke-width="1.5" />
             </svg>
           </div>
           <p class="empty-title serif">还没有地址</p>

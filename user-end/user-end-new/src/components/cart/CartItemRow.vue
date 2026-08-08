@@ -78,7 +78,7 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f4efe4, #e5dfd0);
+  background: #FAFAFB;
   font-family: var(--font-display);
   font-size: 28px;
   color: var(--color-sage);

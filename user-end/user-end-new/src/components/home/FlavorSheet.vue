@@ -204,7 +204,7 @@ async function confirm() {
 .sheet-mask {
   position: fixed;
   inset: 0;
-  background: rgba(31, 42, 29, 0.42);
+  background: rgba(10, 10, 10, 0.42);
   backdrop-filter: blur(2px);
   z-index: 70;
 }
@@ -219,7 +219,7 @@ async function confirm() {
   background: var(--color-cream);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  box-shadow: 0 -32px 64px -16px rgba(31, 42, 29, 0.28);
+  box-shadow: 0 -32px 64px -16px rgba(10, 10, 10, 0.28);
   z-index: 71;
   display: flex;
   flex-direction: column;
@@ -257,7 +257,7 @@ async function confirm() {
   justify-content: center;
   margin-top: -40px;
   border: 4px solid var(--color-cream);
-  box-shadow: 0 12px 24px -12px rgba(31, 42, 29, 0.25);
+  box-shadow: 0 12px 24px -12px rgba(10, 10, 10, 0.25);
 }
 .head-img img {
   width: 100%;
@@ -362,7 +362,7 @@ async function confirm() {
   color: var(--color-tomato);
 }
 .group.is-invalid .chip:not(.is-active) {
-  border-color: rgba(217, 83, 79, 0.4);
+  border-color: rgba(51, 65, 85, 0.4);
 }
 .body-hint {
   margin-top: -4px;
@@ -396,7 +396,7 @@ async function confirm() {
   color: var(--color-paper);
   border-color: var(--color-sage);
   font-weight: 600;
-  box-shadow: 0 4px 12px -4px rgba(63, 107, 58, 0.4);
+  box-shadow: 0 4px 12px -4px rgba(71, 85, 105, 0.4);
 }
 
 @keyframes nudge {

@@ -8,30 +8,178 @@
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 var(--gutter);
+  position: relative;
+  z-index: 1;
 }
 
+/* —— 字族工具 —— */
 .serif {
   font-family: var(--font-display);
 }
-
+.cn {
+  font-family: var(--font-serif-cn);
+}
+.pix {
+  font-family: var(--font-pix);
+  letter-spacing: 0.04em;
+}
+.mono {
+  font-family: var(--font-mono);
+}
 .sans {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
 }
 
-.eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--fs-12);
-  font-weight: 600;
+/* —— 像素装饰构件 —— */
+/* 小方块：作标点 */
+.sq {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--color-ink);
+  vertical-align: middle;
+}
+.sq.steel {
+  background: var(--color-steel);
+}
+.sq.soft {
+  background: var(--color-ink-3);
+}
+.sq.line {
+  background: var(--color-line);
+}
+
+/* 像素虚线：一行小点 */
+.pix-rule {
+  display: flex;
+  gap: 3px;
+  flex-wrap: nowrap;
+}
+.pix-rule i {
+  width: 2px;
+  height: 2px;
+  background: var(--color-ink-3);
+  display: block;
+}
+.pix-rule i.s {
+  background: var(--color-steel);
+}
+
+/* 角标：像素小方框 */
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+}
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  background: var(--color-ink);
+}
+.corner.tl::before {
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 1px;
+}
+.corner.tl::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 14px;
+}
+.corner.tr::before {
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 1px;
+}
+.corner.tr::after {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 14px;
+}
+.corner.bl::before {
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  height: 1px;
+}
+.corner.bl::after {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 14px;
+}
+.corner.br::before {
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 1px;
+}
+.corner.br::after {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 14px;
+}
+
+/* —— 标签：像素字 + 前置方块 —— */
+.label {
+  font-family: var(--font-pix);
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-sage);
+  color: var(--color-ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-ink);
+  display: inline-block;
+}
+.label.steel::before {
+  background: var(--color-steel);
+}
+.label.ghost {
+  color: var(--color-ink-3);
+}
+.label.ghost::before {
+  background: var(--color-ink-4);
 }
 
+/* 兼容旧工具类：eyebrow 改为像素标签风 */
+.eyebrow {
+  font-family: var(--font-pix);
+  font-size: var(--fs-12);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-steel);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--color-steel);
+  display: inline-block;
+}
+
+/* 分隔点 → 改为小方点（像素风） */
 .divider-dot {
   display: inline-block;
   width: 4px;
   height: 4px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--color-ink-mute);
   margin: 0 12px;
   vertical-align: middle;

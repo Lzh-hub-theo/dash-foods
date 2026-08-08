@@ -78,7 +78,7 @@ function goCheckout(e: Event) {
   background: var(--color-ink);
   color: var(--color-paper);
   border-radius: var(--radius-pill);
-  box-shadow: 0 24px 48px -16px rgba(31, 42, 29, 0.45);
+  box-shadow: 0 24px 48px -16px rgba(10, 10, 10, 0.45);
   cursor: pointer;
   user-select: none;
   transition: transform var(--dur-base) var(--ease-out);
@@ -89,7 +89,7 @@ function goCheckout(e: Event) {
 .cart-fab.is-closed {
   background: var(--color-line);
   cursor: not-allowed;
-  box-shadow: 0 16px 32px -16px rgba(31, 42, 29, 0.18);
+  box-shadow: 0 16px 32px -16px rgba(10, 10, 10, 0.18);
 }
 .cart-fab.is-closed:hover {
   transform: translateX(-50%);
@@ -107,10 +107,10 @@ function goCheckout(e: Event) {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(255, 254, 250, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 .cart-fab.is-closed .fab-icon {
-  background: rgba(31, 42, 29, 0.08);
+  background: rgba(10, 10, 10, 0.08);
 }
 .fab-count {
   font-size: var(--fs-14);
@@ -120,21 +120,21 @@ function goCheckout(e: Event) {
 .fab-divider {
   width: 1px;
   height: 22px;
-  background: rgba(255, 254, 250, 0.16);
+  background: rgba(255, 255, 255, 0.16);
 }
 .cart-fab.is-closed .fab-divider {
-  background: rgba(31, 42, 29, 0.12);
+  background: rgba(10, 10, 10, 0.12);
 }
 .fab-amount em {
   font-style: normal;
   font-size: var(--fs-12);
   letter-spacing: 0.2em;
-  color: rgba(255, 254, 250, 0.6);
+  color: rgba(255, 255, 255, 0.6);
   margin-right: 6px;
   text-transform: uppercase;
 }
 .cart-fab.is-closed .fab-amount em {
-  color: rgba(31, 42, 29, 0.5);
+  color: rgba(10, 10, 10, 0.5);
 }
 .fab-amount strong {
   font-family: var(--font-display);
@@ -165,8 +165,8 @@ function goCheckout(e: Event) {
   transform: scale(0.96);
 }
 .fab-cta:disabled {
-  background: rgba(31, 42, 29, 0.12);
-  color: rgba(31, 42, 29, 0.5);
+  background: rgba(10, 10, 10, 0.12);
+  color: rgba(10, 10, 10, 0.5);
   cursor: not-allowed;
   box-shadow: none;
 }

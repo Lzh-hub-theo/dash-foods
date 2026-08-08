@@ -245,7 +245,7 @@ function changeCategory(id: number) {
 }
 .cache-time .dot.is-stale {
   background: var(--color-apricot-deep);
-  box-shadow: 0 0 0 3px rgba(242, 166, 90, 0.18);
+  box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.18);
 }
 .refresh-btn {
   display: inline-flex;
@@ -287,8 +287,8 @@ function changeCategory(id: number) {
   margin: 28px auto 0;
   width: min(960px, calc(100% - 32px));
   padding: 14px 20px;
-  background: rgba(217, 83, 79, 0.06);
-  border: 1px dashed rgba(217, 83, 79, 0.32);
+  background: rgba(51, 65, 85, 0.06);
+  border: 1px dashed rgba(51, 65, 85, 0.32);
   color: var(--color-tomato);
   border-radius: var(--radius-md);
   font-size: var(--fs-13);
@@ -302,7 +302,7 @@ function changeCategory(id: number) {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(217, 83, 79, 0.12);
+  background: rgba(51, 65, 85, 0.12);
   flex-shrink: 0;
 }
 .shop-closed-banner .msg {

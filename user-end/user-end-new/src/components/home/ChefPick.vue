@@ -61,9 +61,9 @@ function add(e: MouseEvent) {
           <img v-if="image" :src="image" :alt="name" @error="($event.target as HTMLImageElement).style.display='none'" />
           <div v-else class="cp-fallback">
             <svg viewBox="0 0 200 200" fill="none">
-              <circle cx="100" cy="100" r="80" fill="#F4EFE4" stroke="#E5DFD0" />
-              <path d="M70 80 C 80 60, 120 60, 130 80 C 120 70, 80 70, 70 80 Z" fill="#3F6B3A" />
-              <circle cx="100" cy="120" r="22" fill="#F2A65A" />
+              <circle cx="100" cy="100" r="80" fill="#FAFAFB" stroke="#E5E7EB" />
+              <path d="M70 80 C 80 60, 120 60, 130 80 C 120 70, 80 70, 70 80 Z" fill="#475569" />
+              <circle cx="100" cy="120" r="22" fill="#475569" />
             </svg>
           </div>
           <span class="cp-pin">今日限定</span>
@@ -264,11 +264,11 @@ function add(e: MouseEvent) {
 .cp-add:hover {
   background: var(--color-sage-deep);
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px -8px rgba(47, 82, 48, 0.4);
+  box-shadow: 0 12px 24px -8px rgba(51, 65, 85, 0.4);
 }
 .cp-add:disabled {
   background: var(--color-line);
-  color: rgba(31, 42, 29, 0.5);
+  color: rgba(10, 10, 10, 0.5);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;

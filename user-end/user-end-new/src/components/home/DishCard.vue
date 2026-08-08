@@ -88,82 +88,82 @@ const needFlavor = computed(() => Boolean(props.hasFlavor && props.dish.flavors?
       <div v-if="showFallback" class="img-fallback" :data-cat="categoryKey">
         <svg class="fb-illus" viewBox="0 0 200 160" fill="none">
           <!-- 通用底盘（盘） -->
-          <ellipse cx="100" cy="135" rx="70" ry="10" fill="#1F2A1D" opacity="0.06" />
+          <ellipse cx="100" cy="135" rx="70" ry="10" fill="#0A0A0A" opacity="0.06" />
 
           <!-- rice 饭类：碗+米 -->
           <g v-if="categoryKey === 'rice'">
-            <path d="M40 90 Q40 70 100 70 Q160 70 160 90 L150 130 Q150 138 142 138 L58 138 Q50 138 50 130 Z" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <ellipse cx="100" cy="92" rx="48" ry="10" fill="#3F6B3A" />
-            <ellipse cx="92" cy="90" rx="6" ry="3" fill="#FFFEFA" opacity="0.9" />
-            <ellipse cx="108" cy="88" rx="5" ry="2.5" fill="#FFFEFA" opacity="0.8" />
-            <ellipse cx="100" cy="86" rx="4" ry="2" fill="#FFFEFA" opacity="0.7" />
+            <path d="M40 90 Q40 70 100 70 Q160 70 160 90 L150 130 Q150 138 142 138 L58 138 Q50 138 50 130 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <ellipse cx="100" cy="92" rx="48" ry="10" fill="#475569" />
+            <ellipse cx="92" cy="90" rx="6" ry="3" fill="#FFFFFF" opacity="0.9" />
+            <ellipse cx="108" cy="88" rx="5" ry="2.5" fill="#FFFFFF" opacity="0.8" />
+            <ellipse cx="100" cy="86" rx="4" ry="2" fill="#FFFFFF" opacity="0.7" />
           </g>
 
           <!-- noodle 面类：碗+面线 -->
           <g v-else-if="categoryKey === 'noodle'">
-            <path d="M40 90 Q40 70 100 70 Q160 70 160 90 L150 130 Q150 138 142 138 L58 138 Q50 138 50 130 Z" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <ellipse cx="100" cy="90" rx="48" ry="10" fill="#F4EFE4" />
-            <path d="M62 88 Q82 76 100 86 Q118 76 138 88" stroke="#F2A65A" stroke-width="1.8" fill="none" stroke-linecap="round" />
-            <path d="M68 84 Q86 72 100 82 Q114 72 132 84" stroke="#F2A65A" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.85" />
-            <circle cx="86" cy="86" r="3" fill="#3F6B3A" />
-            <circle cx="116" cy="86" r="3" fill="#3F6B3A" />
+            <path d="M40 90 Q40 70 100 70 Q160 70 160 90 L150 130 Q150 138 142 138 L58 138 Q50 138 50 130 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <ellipse cx="100" cy="90" rx="48" ry="10" fill="#FAFAFB" />
+            <path d="M62 88 Q82 76 100 86 Q118 76 138 88" stroke="#475569" stroke-width="1.8" fill="none" stroke-linecap="round" />
+            <path d="M68 84 Q86 72 100 82 Q114 72 132 84" stroke="#475569" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.85" />
+            <circle cx="86" cy="86" r="3" fill="#475569" />
+            <circle cx="116" cy="86" r="3" fill="#475569" />
           </g>
 
           <!-- soup 汤类：碗+蒸汽 -->
           <g v-else-if="categoryKey === 'soup'">
-            <path d="M40 100 Q40 78 100 78 Q160 78 160 100 L150 132 Q150 140 142 140 L58 140 Q50 140 50 132 Z" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <ellipse cx="100" cy="102" rx="48" ry="10" fill="#D9534F" opacity="0.85" />
-            <path d="M70 64 Q66 56 70 50" stroke="#A4C49A" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
-            <path d="M100 60 Q96 52 100 46" stroke="#A4C49A" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
-            <path d="M130 64 Q126 56 130 50" stroke="#A4C49A" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
+            <path d="M40 100 Q40 78 100 78 Q160 78 160 100 L150 132 Q150 140 142 140 L58 140 Q50 140 50 132 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <ellipse cx="100" cy="102" rx="48" ry="10" fill="#475569" opacity="0.85" />
+            <path d="M70 64 Q66 56 70 50" stroke="#9CA3AF" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
+            <path d="M100 60 Q96 52 100 46" stroke="#9CA3AF" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
+            <path d="M130 64 Q126 56 130 50" stroke="#9CA3AF" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
           </g>
 
           <!-- salad 沙拉：圆碗+叶 -->
           <g v-else-if="categoryKey === 'salad'">
-            <ellipse cx="100" cy="120" rx="60" ry="14" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <path d="M60 110 Q70 78 100 78 Q130 78 140 110 Z" fill="#A4C49A" />
-            <path d="M70 100 Q80 86 92 96" stroke="#3F6B3A" stroke-width="1.5" fill="none" stroke-linecap="round" />
-            <path d="M108 96 Q120 84 132 98" stroke="#3F6B3A" stroke-width="1.5" fill="none" stroke-linecap="round" />
-            <circle cx="88" cy="92" r="3" fill="#D9534F" />
-            <circle cx="112" cy="90" r="3" fill="#F2A65A" />
-            <circle cx="100" cy="100" r="3" fill="#FFE9B8" />
+            <ellipse cx="100" cy="120" rx="60" ry="14" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <path d="M60 110 Q70 78 100 78 Q130 78 140 110 Z" fill="#9CA3AF" />
+            <path d="M70 100 Q80 86 92 96" stroke="#475569" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            <path d="M108 96 Q120 84 132 98" stroke="#475569" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            <circle cx="88" cy="92" r="3" fill="#475569" />
+            <circle cx="112" cy="90" r="3" fill="#475569" />
+            <circle cx="100" cy="100" r="3" fill="#F4F5F7" />
           </g>
 
           <!-- drink 饮品：杯+吸管 -->
           <g v-else-if="categoryKey === 'drink'">
-            <path d="M68 50 L72 138 Q72 144 78 144 L122 144 Q128 144 128 138 L132 50 Z" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <path d="M68 50 L132 50" stroke="#1F2A1D" stroke-width="1.5" stroke-linecap="round" />
-            <path d="M76 56 L74 130 Q74 134 78 134 L122 134 Q126 134 126 130 L124 56 Z" fill="#F2A65A" opacity="0.65" />
-            <rect x="116" y="36" width="3" height="20" rx="1.5" fill="#3F6B3A" transform="rotate(15 117 46)" />
-            <circle cx="92" cy="74" r="3" fill="#FFFEFA" opacity="0.7" />
-            <circle cx="106" cy="86" r="2" fill="#FFFEFA" opacity="0.7" />
+            <path d="M68 50 L72 138 Q72 144 78 144 L122 144 Q128 144 128 138 L132 50 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <path d="M68 50 L132 50" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M76 56 L74 130 Q74 134 78 134 L122 134 Q126 134 126 130 L124 56 Z" fill="#475569" opacity="0.65" />
+            <rect x="116" y="36" width="3" height="20" rx="1.5" fill="#475569" transform="rotate(15 117 46)" />
+            <circle cx="92" cy="74" r="3" fill="#FFFFFF" opacity="0.7" />
+            <circle cx="106" cy="86" r="2" fill="#FFFFFF" opacity="0.7" />
           </g>
 
           <!-- dessert 甜品：杯+奶油 -->
           <g v-else-if="categoryKey === 'dessert'">
-            <path d="M62 96 L72 140 Q72 144 76 144 L124 144 Q128 144 128 140 L138 96 Z" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <path d="M62 96 L138 96" stroke="#1F2A1D" stroke-width="1.5" />
-            <ellipse cx="100" cy="96" rx="38" ry="8" fill="#F2A65A" />
-            <ellipse cx="100" cy="86" rx="32" ry="6" fill="#FFE9B8" />
-            <ellipse cx="100" cy="78" rx="26" ry="5" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1" />
-            <circle cx="92" cy="72" r="2" fill="#D9534F" />
-            <circle cx="108" cy="74" r="2" fill="#3F6B3A" />
+            <path d="M62 96 L72 140 Q72 144 76 144 L124 144 Q128 144 128 140 L138 96 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <path d="M62 96 L138 96" stroke="#0A0A0A" stroke-width="1.5" />
+            <ellipse cx="100" cy="96" rx="38" ry="8" fill="#475569" />
+            <ellipse cx="100" cy="86" rx="32" ry="6" fill="#F4F5F7" />
+            <ellipse cx="100" cy="78" rx="26" ry="5" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1" />
+            <circle cx="92" cy="72" r="2" fill="#475569" />
+            <circle cx="108" cy="74" r="2" fill="#475569" />
           </g>
 
           <!-- bun 包子：圆胖+褶 -->
           <g v-else-if="categoryKey === 'bun'">
-            <path d="M50 100 Q50 70 100 70 Q150 70 150 100 Q150 132 100 132 Q50 132 50 100 Z" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <path d="M70 86 Q72 80 76 86" stroke="#1F2A1D" stroke-width="1" fill="none" />
-            <path d="M88 80 Q90 74 94 80" stroke="#1F2A1D" stroke-width="1" fill="none" />
-            <path d="M106 80 Q108 74 112 80" stroke="#1F2A1D" stroke-width="1" fill="none" />
-            <path d="M124 86 Q126 80 130 86" stroke="#1F2A1D" stroke-width="1" fill="none" />
-            <ellipse cx="100" cy="134" rx="40" ry="4" fill="#1F2A1D" opacity="0.1" />
+            <path d="M50 100 Q50 70 100 70 Q150 70 150 100 Q150 132 100 132 Q50 132 50 100 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <path d="M70 86 Q72 80 76 86" stroke="#0A0A0A" stroke-width="1" fill="none" />
+            <path d="M88 80 Q90 74 94 80" stroke="#0A0A0A" stroke-width="1" fill="none" />
+            <path d="M106 80 Q108 74 112 80" stroke="#0A0A0A" stroke-width="1" fill="none" />
+            <path d="M124 86 Q126 80 130 86" stroke="#0A0A0A" stroke-width="1" fill="none" />
+            <ellipse cx="100" cy="134" rx="40" ry="4" fill="#0A0A0A" opacity="0.1" />
           </g>
 
           <!-- default 通用：椭圆盘+首字 -->
           <g v-else>
-            <ellipse cx="100" cy="120" rx="62" ry="16" fill="#FFFEFA" stroke="#1F2A1D" stroke-width="1.5" />
-            <path d="M70 110 Q70 86 100 86 Q130 86 130 110 Z" fill="#A4C49A" opacity="0.8" />
+            <ellipse cx="100" cy="120" rx="62" ry="16" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" />
+            <path d="M70 110 Q70 86 100 86 Q130 86 130 110 Z" fill="#9CA3AF" opacity="0.8" />
           </g>
         </svg>
         <span class="fb-glyph">{{ dish.name?.slice(0, 1) || '·' }}</span>
@@ -259,16 +259,14 @@ const needFlavor = computed(() => Boolean(props.hasFlavor && props.dish.flavors?
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(164, 196, 154, 0.32), transparent 60%),
-    linear-gradient(135deg, #f4efe4, #e5dfd0);
+  background: #F4F5F7;
 }
 .img-fallback .fb-illus {
   width: 70%;
   height: 70%;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 6px 16px rgba(31, 42, 29, 0.08));
+  filter: drop-shadow(0 6px 16px rgba(10, 10, 10, 0.08));
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .dish-card:hover .fb-illus {
@@ -309,7 +307,7 @@ const needFlavor = computed(() => Boolean(props.hasFlavor && props.dish.flavors?
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  background: rgba(217, 83, 79, 0.92);
+  background: rgba(51, 65, 85, 0.92);
   color: var(--color-paper);
   border-radius: var(--radius-pill);
 }
@@ -319,7 +317,7 @@ const needFlavor = computed(() => Boolean(props.hasFlavor && props.dish.flavors?
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(31, 42, 29, 0.4);
+  background: rgba(10, 10, 10, 0.4);
   color: var(--color-paper);
   font-family: var(--font-display);
   font-style: italic;
@@ -460,7 +458,7 @@ const needFlavor = computed(() => Boolean(props.hasFlavor && props.dish.flavors?
   background: var(--color-sage);
   color: var(--color-paper);
   border-color: var(--color-sage);
-  box-shadow: 0 6px 16px -6px rgba(63, 107, 58, 0.4);
+  box-shadow: 0 6px 16px -6px rgba(71, 85, 105, 0.4);
 }
 .btn-add:hover {
   background: var(--color-sage-deep);

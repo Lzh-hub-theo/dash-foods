@@ -72,10 +72,10 @@ function checkout() {
         <div v-else class="empty">
           <div class="empty-illus">
             <svg viewBox="0 0 120 120" fill="none">
-              <circle cx="60" cy="60" r="50" stroke="#E5DFD0" stroke-width="1.5" stroke-dasharray="3 4" />
-              <path d="M40 50 L 40 80 a 4 4 0 0 0 4 4 h 32 a 4 4 0 0 0 4 -4 L 80 50" stroke="#A4C49A" stroke-width="2" fill="none" />
-              <path d="M35 50 L 85 50" stroke="#A4C49A" stroke-width="2" stroke-linecap="round" />
-              <path d="M55 50 L 55 38 a 5 5 0 0 1 10 0 L 65 50" stroke="#A4C49A" stroke-width="2" fill="none" />
+              <circle cx="60" cy="60" r="50" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="3 4" />
+              <path d="M40 50 L 40 80 a 4 4 0 0 0 4 4 h 32 a 4 4 0 0 0 4 -4 L 80 50" stroke="#9CA3AF" stroke-width="2" fill="none" />
+              <path d="M35 50 L 85 50" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" />
+              <path d="M55 50 L 55 38 a 5 5 0 0 1 10 0 L 65 50" stroke="#9CA3AF" stroke-width="2" fill="none" />
             </svg>
           </div>
           <p class="empty-title">空空如也</p>
@@ -104,7 +104,7 @@ function checkout() {
 .cart-mask {
   position: fixed;
   inset: 0;
-  background: rgba(31, 42, 29, 0.32);
+  background: rgba(10, 10, 10, 0.32);
   backdrop-filter: blur(2px);
   z-index: 60;
 }
@@ -119,7 +119,7 @@ function checkout() {
   z-index: 61;
   display: flex;
   flex-direction: column;
-  box-shadow: -32px 0 64px -16px rgba(31, 42, 29, 0.25);
+  box-shadow: -32px 0 64px -16px rgba(10, 10, 10, 0.25);
   border-left: 1px solid var(--color-line);
 }
 
@@ -282,7 +282,7 @@ function checkout() {
   font-style: normal;
   font-size: 11px;
   letter-spacing: 0.2em;
-  color: rgba(255, 254, 250, 0.7);
+  color: rgba(255, 255, 255, 0.7);
   margin-right: 6px;
   text-transform: uppercase;
 }

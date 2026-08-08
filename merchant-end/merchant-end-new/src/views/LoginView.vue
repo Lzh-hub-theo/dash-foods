@@ -137,26 +137,34 @@ async function onSubmit() {
   background: var(--paper);
 }
 .login__cover {
-  padding: 56px 64px;
-  border-right: 3px solid var(--ink);
+  padding: 64px 72px;
+  border-right: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
   gap: 18px;
   background: var(--paper-deep);
   min-height: 100vh;
+  position: relative;
 }
-.cover__top { letter-spacing: 0.24em; }
+.cover__top {
+  font-family: var(--font-pix);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+}
 .cover__brand {
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(96px, 14vw, 200px);
-  line-height: 0.85;
-  letter-spacing: -0.05em;
-  margin: 12px 0 4px;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(88px, 12vw, 168px);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  margin: 18px 0 8px;
 }
 .cover__sub {
-  font-size: 12px;
-  letter-spacing: 0.24em;
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-muted);
   padding-bottom: 14px;
@@ -168,21 +176,37 @@ async function onSubmit() {
   padding: 24px 0;
   flex: 1 1 auto;
 }
-.cover__column { display: flex; flex-direction: column; gap: 8px; }
+.cover__column { display: flex; flex-direction: column; gap: 10px; }
+.cover__column .dateline {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
 .cover__p {
   font-family: var(--font-display);
   font-size: 16px;
-  line-height: 1.55;
-  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink-soft);
 }
 .cover__p--muted {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
+  font-style: italic;
   font-size: 13px;
   color: var(--ink-muted);
   letter-spacing: 0.02em;
+  line-height: 1.7;
 }
-.cover__hi { background: var(--ink); color: var(--paper); padding: 0 6px; }
-.cover__foot { letter-spacing: 0.22em; padding-top: 14px; }
+.cover__hi { color: var(--signal); font-style: italic; font-weight: 500; }
+.cover__foot {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
+  padding-top: 14px;
+}
 
 /* Form */
 .login__form {
@@ -191,44 +215,67 @@ async function onSubmit() {
   justify-content: center;
   padding: 56px 64px;
 }
-.form__panel { width: 100%; max-width: 420px; }
-.form__eyebrow { letter-spacing: 0.24em; }
-.form__title {
-  font-size: 56px;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-  margin: 12px 0 16px;
-}
-.form__hint {
+.form__panel { width: 100%; max-width: 420px; position: relative; }
+.form__eyebrow {
+  font-family: var(--font-pix);
   font-size: 11px;
   letter-spacing: 0.18em;
   color: var(--ink-muted);
+}
+.form__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 60px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 14px 0 16px;
+}
+.form__hint {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
   text-transform: uppercase;
   margin-bottom: 28px;
+  line-height: 1.8;
 }
 .form__fields { display: flex; flex-direction: column; gap: 18px; }
 .field { display: flex; flex-direction: column; gap: 6px; }
-.field__label { color: var(--ink-muted); }
+.field__label {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
 .check {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-family: var(--font-pix);
+  font-size: 10px;
   letter-spacing: 0.16em;
   color: var(--ink-muted);
+  text-transform: uppercase;
 }
 .form__submit {
-  padding: 14px 20px;
+  padding: 14px 22px;
+  font-family: var(--font-display);
+  font-weight: 500;
   font-size: 14px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.04em;
   margin-top: 8px;
 }
 .form__foot {
+  font-family: var(--font-pix);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
   margin-top: 22px;
   padding-top: 14px;
-  border-top: 1px solid var(--rule-faint);
-  color: var(--ink-faint);
+  border-top: 1px solid var(--rule-soft);
 }
 
 @media (max-width: 980px) {

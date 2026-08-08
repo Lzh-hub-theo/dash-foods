@@ -94,7 +94,7 @@ const statusLabel = computed(() =>
   pointer-events: none;
 }
 .app-footer.is-closed::before {
-  background: linear-gradient(180deg, rgba(217, 83, 79, 0.04), transparent 60%);
+  background: linear-gradient(180deg, rgba(71, 85, 105, 0.06), transparent 60%);
   opacity: 0.9;
 }
 

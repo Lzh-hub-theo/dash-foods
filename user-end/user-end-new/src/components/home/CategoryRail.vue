@@ -55,10 +55,10 @@ function pick(id: number) {
       </p>
       <div class="aside-stamp">
         <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="40" cy="40" r="36" stroke="#3F6B3A" stroke-width="1.4" />
-          <circle cx="40" cy="40" r="30" stroke="#3F6B3A" stroke-width="0.8" stroke-dasharray="2 3" />
-          <path d="M40 22 C 28 32, 28 48, 40 58 C 52 48, 52 32, 40 22 Z" fill="#3F6B3A" opacity="0.85" />
-          <path d="M40 22 L 40 58" stroke="#FFFEFA" stroke-width="1.2" />
+          <circle cx="40" cy="40" r="36" stroke="#475569" stroke-width="1.4" />
+          <circle cx="40" cy="40" r="30" stroke="#475569" stroke-width="0.8" stroke-dasharray="2 3" />
+          <path d="M40 22 C 28 32, 28 48, 40 58 C 52 48, 52 32, 40 22 Z" fill="#475569" opacity="0.85" />
+          <path d="M40 22 L 40 58" stroke="#FFFFFF" stroke-width="1.2" />
         </svg>
       </div>
     </div>
@@ -115,11 +115,7 @@ function pick(id: number) {
 .rail-item.is-active {
   color: var(--color-sage-deep);
   border-left-color: var(--color-sage);
-  background: linear-gradient(
-    90deg,
-    rgba(63, 107, 58, 0.06) 0%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, rgba(71, 85, 105, 0.06) 0%, transparent 100%);
 }
 .rail-item.is-active::before {
   content: '';

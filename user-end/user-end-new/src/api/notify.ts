@@ -35,10 +35,10 @@ export function ElMessage(opts: ToastOpts) {
   const root = ensureHost()
   const el = document.createElement('div')
   const palette: Record<ToastType, { bg: string; bd: string; fg: string }> = {
-    success: { bg: '#F0F7EE', bd: '#3F6B3A', fg: '#2F5230' },
-    error: { bg: '#FCEDEB', bd: '#D9534F', fg: '#B03A37' },
-    info: { bg: '#FFFEFA', bd: '#E5DFD0', fg: '#1F2A1D' },
-    warning: { bg: '#FFF6E2', bd: '#E0A93B', fg: '#8A6312' },
+    success: { bg: '#FFFFFF', bd: '#475569', fg: '#334155' },
+    error: { bg: '#FFFFFF', bd: '#334155', fg: '#0A0A0A' },
+    info: { bg: '#FFFFFF', bd: '#E5E7EB', fg: '#374151' },
+    warning: { bg: '#FFFFFF', bd: '#0A0A0A', fg: '#0A0A0A' },
   }
   const c = palette[opts.type]
   Object.assign(el.style, {
@@ -46,12 +46,12 @@ export function ElMessage(opts: ToastOpts) {
     color: c.fg,
     border: `1px solid ${c.bd}`,
     padding: '12px 18px',
-    borderRadius: '999px',
-    fontFamily: 'Manrope, system-ui, sans-serif',
+    borderRadius: '0',
+    fontFamily: 'Fraunces, "Noto Serif SC", serif',
     fontSize: '14px',
     fontWeight: '500',
-    letterSpacing: '0.02em',
-    boxShadow: '0 8px 24px -8px rgba(31,42,29,0.18)',
+    letterSpacing: '0.01em',
+    boxShadow: '0 10px 24px -8px rgba(10,10,10,0.18)',
     pointerEvents: 'auto',
     opacity: '0',
     transform: 'translateY(-8px)',
@@ -86,7 +86,7 @@ function ensureOverlay() {
   Object.assign(overlay.style, {
     position: 'fixed',
     inset: '0',
-    background: 'rgba(31, 42, 29, 0.32)',
+    background: 'rgba(10, 10, 10, 0.32)',
     backdropFilter: 'blur(2px)',
     display: 'flex',
     alignItems: 'center',
@@ -107,22 +107,23 @@ export function ElMessageBox(opts: BoxOpts): Promise<boolean> {
     const root = ensureOverlay()
     const card = document.createElement('div')
     Object.assign(card.style, {
-      background: '#FFFEF A',
-      borderRadius: '20px',
+      background: '#FFFFFF',
+      borderRadius: '0',
       padding: '28px 28px 20px',
       width: 'min(420px, 92vw)',
-      boxShadow: '0 20px 60px -16px rgba(31, 42, 29, 0.28)',
+      boxShadow: '0 20px 60px -16px rgba(10, 10, 10, 0.28)',
       transform: 'translateY(8px) scale(0.98)',
       transition: 'transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1)',
-      fontFamily: 'Manrope, system-ui, sans-serif',
+      fontFamily: 'Fraunces, "Noto Serif SC", serif',
+      border: '1px solid #E5E7EB',
     })
-    card.style.background = '#FFFEFA'
+    card.style.background = '#FFFFFF'
     card.innerHTML = `
-      <div style="font-family:Fraunces, Georgia, serif; font-size:20px; font-weight:500; color:#1F2A1D; margin-bottom:8px;">${opts.title ?? '提示'}</div>
-      <div style="font-size:14px; line-height:1.65; color:#4A5C46; white-space:pre-wrap;">${opts.message}</div>
+      <div style="font-family:Fraunces, Georgia, serif; font-size:20px; font-weight:500; font-style:italic; color:#0A0A0A; margin-bottom:8px;">${opts.title ?? '提示'}</div>
+      <div style="font-size:14px; line-height:1.65; color:#374151; white-space:pre-wrap;">${opts.message}</div>
       <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
-        <button data-act="cancel" style="padding:9px 18px; border-radius:999px; border:1.5px solid #E5DFD0; background:#FFFEFA; color:#1F2A1D; font-size:13px; font-weight:500; cursor:pointer;">${opts.cancelText ?? '取消'}</button>
-        <button data-act="ok" style="padding:9px 22px; border-radius:999px; border:none; background:#1F2A1D; color:#FFFEFA; font-size:13px; font-weight:600; cursor:pointer;">${opts.confirmText ?? '确认'}</button>
+        <button data-act="cancel" style="padding:9px 18px; border-radius:0; border:1px solid #0A0A0A; background:transparent; color:#0A0A0A; font-size:13px; font-weight:500; cursor:pointer; font-family:Fraunces, serif;">${opts.cancelText ?? '取消'}</button>
+        <button data-act="ok" style="padding:9px 22px; border-radius:0; border:1px solid #0A0A0A; background:#0A0A0A; color:#FFFFFF; font-size:13px; font-weight:600; cursor:pointer; font-family:Fraunces, serif;">${opts.confirmText ?? '确认'}</button>
       </div>
     `
     root.appendChild(card)
