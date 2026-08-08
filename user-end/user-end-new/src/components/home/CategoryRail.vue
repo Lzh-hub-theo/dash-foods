@@ -21,10 +21,11 @@ const list = computed(() => props.categories ?? [])
 function pick(id: number) {
   emit('change', id)
   // 平滑滚动到对应分类
+  // 使用 scrollIntoView：CSS 已在 .cat-section 上设置 scroll-margin-top
+  // 让目标标题避让 sticky header，不再依赖易错的 offsetTop
   const el = document.querySelector(`[data-cat-anchor="${id}"]`)
   if (el) {
-    const top = (el as HTMLElement).offsetTop - 120
-    window.scrollTo({ top, behavior: 'smooth' })
+    ;(el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 }
 </script>
@@ -71,6 +72,12 @@ function pick(id: number) {
   top: calc(var(--header-h) + 24px);
   width: 220px;
   flex-shrink: 0;
+  /* 跟随 .menu-inner 撑满高度（align-items: stretch），
+     让 sticky 跨越整个菜单区域 */
+  align-self: flex-start;
+  max-height: calc(100vh - var(--header-h) - 48px);
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .rail-eyebrow {

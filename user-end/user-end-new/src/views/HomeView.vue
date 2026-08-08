@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, computed, ref } from 'vue'
-import HeroSection from '@/components/home/HeroSection.vue'
-import MarqueeBar from '@/components/home/MarqueeBar.vue'
 import CategoryRail from '@/components/home/CategoryRail.vue'
 import DishGrid from '@/components/home/DishGrid.vue'
 import ChefPick from '@/components/home/ChefPick.vue'
@@ -111,9 +109,6 @@ function changeCategory(id: number) {
 
 <template>
   <div class="home">
-    <HeroSection />
-    <MarqueeBar />
-
     <Transition name="banner">
       <aside v-if="isShopClosed" class="shop-closed-banner" role="status">
         <span class="ico" aria-hidden="true">
@@ -332,7 +327,8 @@ function changeCategory(id: number) {
 .menu-inner {
   display: flex;
   gap: 56px;
-  align-items: flex-start;
+  /* 让左侧分类栏高度跟随右侧菜品总高度，sticky 才有"行程" */
+  align-items: stretch;
 }
 
 @media (max-width: 960px) {

@@ -24,7 +24,10 @@ body {
   text-rendering: optimizeLegibility;
   font-synthesis: none;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  /* 用 clip 而非 hidden：hidden 会把另一轴强制为 auto，
+     创建滚动上下文导致 position: sticky 失效。
+     clip 只裁剪不创建滚动上下文。*/
+  overflow-x: clip;
 }
 
 body {
