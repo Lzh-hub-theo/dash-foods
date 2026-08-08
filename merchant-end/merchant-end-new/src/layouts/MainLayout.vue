@@ -42,7 +42,7 @@ function closeUserMenu() {
 
 async function onLogout() {
   closeUserMenu()
-  const ok = await ElMessageBox('EXIT', '确定要退出登录吗？', { confirmText: 'EXIT', cancelText: 'CANCEL' })
+  const ok = await ElMessageBox('退出', '确定要退出登录吗？', { confirmText: '退出', cancelText: '取消' })
   if (ok) {
     await auth.logout()
     router.push('/login')
@@ -165,10 +165,10 @@ async function submitChangePw() {
     </div>
 
     <!-- 改密 Modal -->
-    <Modal :open="pwOpen" title="CHANGE PASSWORD" width="440px" @close="pwOpen = false">
+    <Modal :open="pwOpen" title="修改密码" width="440px" @close="pwOpen = false">
       <div class="pw-form">
         <label class="field">
-          <span class="field__label dateline">OLD · 旧密码</span>
+          <span class="field__label dateline">OLD · 原密码</span>
           <input v-model="pwOld" type="password" class="input" autocomplete="current-password" />
         </label>
         <label class="field">
@@ -181,8 +181,8 @@ async function submitChangePw() {
         </label>
       </div>
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="pwOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="submitChangePw">SAVE</button>
+        <button class="btn btn-sm btn-ghost" @click="pwOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="submitChangePw">保存</button>
       </template>
     </Modal>
   </div>
@@ -251,6 +251,14 @@ async function submitChangePw() {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
+}
+.side__link--on:hover {
+  /* 选中态悬浮保持黑底白字，不变藏青 */
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(10, 10, 10, 0.45);
 }
 .side__link-cn { font-family: var(--font-display); font-size: 17px; font-weight: 500; line-height: 1.1; }
 .side__link-en {

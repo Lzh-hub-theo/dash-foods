@@ -100,9 +100,9 @@ async function submitEdit() {
 async function onTogglePill(e: Employee) {
   if (e.status === 1) {
     const ok = await ElMessageBox(
-      'DISABLE',
+      '禁用',
       `确定禁用员工「${e.name}」?`,
-      { danger: true, confirmText: 'DISABLE' },
+      { danger: true, confirmText: '禁用' },
     )
     if (ok) await store.toggleStatus(e.id, e.status)
   } else {
@@ -123,42 +123,37 @@ onMounted(load)
 <template>
   <section class="emps">
     <header class="emps__head">
-      <div class="emps__head-l">
-        <span class="dateline">§ STAFF · 员工名录</span>
-        <h2 class="emps__title headline">EMPLOYEES</h2>
-      </div>
-      <div class="emps__head-r">
-        <button class="btn btn-signal" @click="openCreate">+ NEW EMPLOYEE</button>
-      </div>
+      <span class="dateline">§ EMPLOYEES · 员工管理</span>
     </header>
 
     <hr class="rule-thick" />
 
     <div class="emps__filters">
       <div class="filter filter--wide">
-        <span class="dateline">NAME</span>
+        <span class="dateline">姓名</span>
         <input v-model="nameFilter" class="input" placeholder="按姓名搜索" @keyup.enter="onSearch" />
       </div>
       <div class="filter__actions">
-        <button class="btn btn-sm" @click="onSearch">SEARCH</button>
-        <button class="btn btn-sm btn-ghost" @click="onReset">RESET</button>
+        <button class="btn btn-sm" @click="onSearch">查询</button>
+        <button class="btn btn-sm btn-ghost" @click="onReset">重置</button>
+        <button class="btn btn-sm" @click="openCreate">+ 新增</button>
       </div>
     </div>
 
     <div class="emps__table-wrap">
-      <div v-if="store.loading && store.list.length === 0" class="emps__loading font-mono">LOADING…</div>
+      <div v-if="store.loading && store.list.length === 0" class="emps__loading font-mono">加载中…</div>
       <EmptyState v-else-if="store.list.length === 0" message="暂无员工" hint="ADD A NEW ONE TO START" />
       <table v-else class="tbl emps__tbl">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Sex</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th class="t-right">Action</th>
+            <th>编号</th>
+            <th>账号</th>
+            <th>姓名</th>
+            <th>手机号</th>
+            <th>性别</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th class="t-right">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -169,12 +164,12 @@ onMounted(load)
             <td class="font-mono">{{ e.phone || '——' }}</td>
             <td class="font-mono">{{ e.sex || '——' }}</td>
             <td>
-              <StatusPill :status="e.status" @toggle="onTogglePill(e)" :on-label="'ACTIVE'" :off-label="'DISABLED'" />
+              <StatusPill :status="e.status" @toggle="onTogglePill(e)" :on-label="'启用'" :off-label="'停用'" />
             </td>
             <td class="font-mono emps__time">{{ fmtTime(e.createTime) }}</td>
             <td class="t-right">
               <div class="actions">
-                <button class="btn btn-sm btn-ghost" @click="openEdit(e)">EDIT</button>
+                <button class="btn btn-sm btn-ghost" @click="openEdit(e)">编辑</button>
               </div>
             </td>
           </tr>
@@ -183,17 +178,17 @@ onMounted(load)
     </div>
 
     <div class="emps__pager font-mono" v-if="store.total > 0">
-      <span>TOTAL {{ store.total }} · PAGE {{ page }} / {{ totalPages }}</span>
+      <span>共 {{ store.total }} 条 · 第 {{ page }} / {{ totalPages }} 页</span>
       <div class="pager__btns">
-        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">PREV</button>
-        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">NEXT</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">上一页</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">下一页</button>
       </div>
     </div>
 
     <!-- 编辑 Modal -->
     <Modal
       :open="editOpen"
-      :title="editMode === 'create' ? 'NEW EMPLOYEE' : 'EDIT EMPLOYEE'"
+      :title="editMode === 'create' ? '新增员工' : '编辑员工'"
       width="520px"
       @close="editOpen = false"
     >
@@ -237,35 +232,25 @@ onMounted(load)
         </template>
       </div>
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="editOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? 'CREATE' : 'SAVE' }}</button>
+        <button class="btn btn-sm btn-ghost" @click="editOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? '创建' : '保存' }}</button>
       </template>
     </Modal>
   </section>
 </template>
 
 <style scoped>
-.emps { display: flex; flex-direction: column; gap: 18px; }
+.emps { display: flex; flex-direction: column; gap: 14px; }
 .emps__head {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
+  display: flex; align-items: flex-end; gap: 18px;
   padding-top: 4px;
 }
-.emps__head-l { display: flex; flex-direction: column; gap: 8px; }
-.emps__head-l .dateline {
+.emps__head .dateline {
   font-family: var(--font-pix);
   font-size: 11px;
   letter-spacing: 0.16em;
   color: var(--ink-muted);
   text-transform: uppercase;
-}
-.emps__head-r { display: flex; gap: 10px; }
-.emps__title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 48px;
-  letter-spacing: -0.02em;
-  line-height: 1;
 }
 
 .emps__filters {

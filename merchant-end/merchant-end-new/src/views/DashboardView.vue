@@ -59,11 +59,6 @@ function pct(n: number) {
 }
 
 const now = new Date()
-const issue = computed(() => `VOL. I · NO. ${String(now.getDate()).padStart(2, '0')}`)
-const dateline = computed(() =>
-  now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase(),
-)
-
 // ===== § 03 Donut =====
 const breakdown = computed(() => {
   const dSold = ws.dishes.sold || 0
@@ -158,76 +153,60 @@ const todayTop10Option = computed(() => {
 
 <template>
   <section class="desk">
-    <!-- HERO / 头版头条 -->
-    <header class="desk__hero">
-      <div class="hero__col">
-        <div class="dateline">{{ dateline }} · {{ issue }}</div>
-        <h1 class="hero__title headline">TODAY AT<br />THE DESK.</h1>
-        <p class="hero__lede">
-          今天的营业、订单与菜单正在此集结。
-          {{ shop.isOpen ? '门店已开张，订单正陆续涌入。' : '门店处于打烊状态，可前往「营业状态」一键开张。' }}
-        </p>
-      </div>
-      <div class="hero__col hero__col--right">
-        <div class="hero__weather">
-          <div class="dateline">SERVICE</div>
-          <div class="hero__weather-row">
-            <span class="hero__big tnum headline">{{ shop.isOpen ? 'OPEN' : 'CLOSED' }}</span>
-            <span class="font-mono hero__weather-sub">{{ shop.statusLabel.toUpperCase() }}</span>
-          </div>
-          <div class="dateline">LIVE ORDERS</div>
-          <div class="hero__big hero__big--sm tnum headline">{{ pipelineTotal }}</div>
-        </div>
-      </div>
-    </header>
-
-    <hr class="rule-thick" />
-
-    <!-- § 01 4 块统计 -->
+    <!-- § 01 今日运营数据 + 进行中订单 -->
     <h3 class="desk__section-title headline">
       <span class="desk__no font-mono">§ 01</span>
-      TODAY'S NUMBERS · 今日运营数据
+      今日运营数据
     </h3>
 
-    <div class="desk__stats">
-      <StatBlock
-        label="TURNOVER · 营业额"
-        :value="ws.business.turnover.toFixed(2)"
-        unit="¥"
-        accent="ink"
-        :loading="ws.loading"
-        hint="TODAY · 实时"
-      />
-      <StatBlock
-        label="VALID ORDERS · 有效订单"
-        :value="ws.business.validOrderCount"
-        unit="单"
-        accent="press"
-        :loading="ws.loading"
-        :hint="`COMPLETION ${(ws.business.orderCompletionRate * 100).toFixed(1)}%`"
-      />
-      <StatBlock
-        label="NEW USERS · 新增用户"
-        :value="ws.business.newUsers"
-        unit="人"
-        accent="olive"
-        :loading="ws.loading"
-        hint="TODAY · 实时"
-      />
-      <StatBlock
-        label="AVG PRICE · 客单价"
-        :value="ws.business.unitPrice.toFixed(2)"
-        unit="¥"
-        accent="signal"
-        :loading="ws.loading"
-        hint="PER ORDER"
-      />
+    <div class="desk__stats-row">
+      <div class="desk__stats">
+        <StatBlock
+          label="营业额"
+          :value="ws.business.turnover.toFixed(2)"
+          unit="¥"
+          accent="ink"
+          :loading="ws.loading"
+          hint="今日 · 实时"
+        />
+        <StatBlock
+          label="有效订单"
+          :value="ws.business.validOrderCount"
+          unit="单"
+          accent="press"
+          :loading="ws.loading"
+          :hint="`完成率 ${(ws.business.orderCompletionRate * 100).toFixed(1)}%`"
+        />
+        <StatBlock
+          label="新增用户"
+          :value="ws.business.newUsers"
+          unit="人"
+          accent="olive"
+          :loading="ws.loading"
+          hint="今日 · 实时"
+        />
+        <StatBlock
+          label="客单价"
+          :value="ws.business.unitPrice.toFixed(2)"
+          unit="¥"
+          accent="signal"
+          :loading="ws.loading"
+          hint="每单"
+        />
+        <StatBlock
+          label="进行中订单"
+          :value="pipelineTotal"
+          unit="单"
+          accent="amber"
+          :hint="`待接单 ${stats?.toBeConfirmed || 0} · 已接单 ${stats?.confirmed || 0} · 派送中 ${stats?.deliveryInProgress || 0}`"
+        />
+      </div>
     </div>
 
     <!-- § 02 订单流转堆叠条 -->
     <h3 class="desk__section-title headline">
       <span class="desk__no font-mono">§ 02</span>
-      ORDER FLOW · 订单流转
+      订单流转
     </h3>
 
     <div class="desk__flow">
@@ -237,28 +216,28 @@ const todayTop10Option = computed(() => {
           :style="{ flex: stats?.toBeConfirmed || 0 }"
           :title="`待接单 ${stats?.toBeConfirmed || 0}`"
         >
-          <span class="flow__seg-label font-mono">TO-CONFIRM · {{ stats?.toBeConfirmed || 0 }}</span>
+          <span class="flow__seg-label font-mono">待接单 · {{ stats?.toBeConfirmed || 0 }}</span>
         </div>
         <div
           class="flow__seg flow__seg--press"
           :style="{ flex: stats?.confirmed || 0 }"
           :title="`已接单 ${stats?.confirmed || 0}`"
         >
-          <span class="flow__seg-label font-mono">CONFIRMED · {{ stats?.confirmed || 0 }}</span>
+          <span class="flow__seg-label font-mono">已接单 · {{ stats?.confirmed || 0 }}</span>
         </div>
         <div
           class="flow__seg flow__seg--olive"
           :style="{ flex: stats?.deliveryInProgress || 0 }"
           :title="`派送中 ${stats?.deliveryInProgress || 0}`"
         >
-          <span class="flow__seg-label font-mono">DELIVERY · {{ stats?.deliveryInProgress || 0 }}</span>
+          <span class="flow__seg-label font-mono">派送中 · {{ stats?.deliveryInProgress || 0 }}</span>
         </div>
       </div>
       <div class="flow__legend font-mono">
-        <span>WAITING · 0%</span>
-        <span>{{ pct(stats?.toBeConfirmed || 0) }}% TO-CONFIRM</span>
-        <span>{{ pct(stats?.confirmed || 0) }}% CONFIRMED</span>
-        <span>{{ pct(stats?.deliveryInProgress || 0) }}% DELIVERY</span>
+        <span>等待 · 0%</span>
+        <span>{{ pct(stats?.toBeConfirmed || 0) }}% 待接单</span>
+        <span>{{ pct(stats?.confirmed || 0) }}% 已接单</span>
+        <span>{{ pct(stats?.deliveryInProgress || 0) }}% 派送中</span>
       </div>
     </div>
 
@@ -266,7 +245,6 @@ const todayTop10Option = computed(() => {
     <div class="desk__row">
       <article class="desk__col">
         <div class="desk__col-head">
-          <span class="dateline">§ 03 · OVERVIEW</span>
           <h4 class="desk__col-title headline">今日分类一览</h4>
         </div>
         <hr class="rule" />
@@ -274,7 +252,7 @@ const todayTop10Option = computed(() => {
           <div class="overview__chart">
             <ChartCard
               v-if="breakdownTotal > 0"
-              title="BREAKDOWN"
+              title="分类分布"
               section="菜品/套餐在售 vs 停售"
               :option="donutOption"
               :loading="ws.loading"
@@ -284,23 +262,23 @@ const todayTop10Option = computed(() => {
           </div>
           <dl class="overview__list">
             <div class="overview__row">
-              <dt>DISHES SOLD</dt>
+              <dt>在售菜品</dt>
               <dd class="tnum">{{ ws.dishes.sold }}</dd>
             </div>
             <div class="overview__row">
-              <dt>DISHES OFF</dt>
+              <dt>停售菜品</dt>
               <dd class="tnum">{{ ws.dishes.discontinued }}</dd>
             </div>
             <div class="overview__row">
-              <dt>SETMEALS SOLD</dt>
+              <dt>在售套餐</dt>
               <dd class="tnum">{{ ws.setmeals.sold }}</dd>
             </div>
             <div class="overview__row">
-              <dt>SETMEALS OFF</dt>
+              <dt>停售套餐</dt>
               <dd class="tnum">{{ ws.setmeals.discontinued }}</dd>
             </div>
             <div class="overview__row overview__row--accent">
-              <dt>ORDERS · ALL</dt>
+              <dt>订单总数</dt>
               <dd class="tnum">{{ totalOrders }}</dd>
             </div>
           </dl>
@@ -309,9 +287,8 @@ const todayTop10Option = computed(() => {
 
       <article class="desk__col desk__col--wide">
         <div class="desk__col-head">
-          <span class="dateline">§ 04 · INCOMING</span>
           <h4 class="desk__col-title headline">最新待接订单</h4>
-          <router-link class="desk__more font-mono" :to="{ name: 'orders' }">VIEW ALL →</router-link>
+          <router-link class="desk__more font-mono" :to="{ name: 'orders' }">查看全部 →</router-link>
         </div>
         <hr class="rule" />
         <div v-if="order.loading && order.list.length === 0" class="desk__loading font-mono">LOADING…</div>
@@ -327,7 +304,7 @@ const todayTop10Option = computed(() => {
               <div class="font-mono incoming__phone">{{ o.phone || '——' }}</div>
             </div>
             <div class="incoming__amount">
-              <div class="dateline">AMT</div>
+              <div class="dateline">金额</div>
               <div class="tnum font-mono incoming__amount-val">¥{{ o.amount.toFixed(2) }}</div>
             </div>
             <StatusBadge :status="o.status" />
@@ -339,8 +316,8 @@ const todayTop10Option = computed(() => {
     <!-- § 05 今日 Top 10 -->
     <h3 class="desk__section-title headline">
       <span class="desk__no font-mono">§ 05</span>
-      TODAY'S TOP 10 · 今日销量榜
-      <router-link class="desk__more font-mono" :to="{ name: 'reports' }">FULL REPORT →</router-link>
+      今日销量榜
+      <router-link class="desk__more font-mono" :to="{ name: 'reports' }">完整报表 →</router-link>
     </h3>
 
     <article class="desk__col desk__col--full">
@@ -363,44 +340,18 @@ const todayTop10Option = computed(() => {
 <style scoped>
 .desk { display: flex; flex-direction: column; gap: 28px; }
 
-.desk__hero {
+/* § 01 今日运营数据 + 进行中订单 */
+.desk__stats-row {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 36px;
-  padding: 12px 0 8px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
 }
-.hero__col { display: flex; flex-direction: column; gap: 8px; }
-.hero__col--right { align-items: flex-end; }
-.hero__title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(56px, 8vw, 96px);
-  letter-spacing: -0.025em;
-  line-height: 0.95;
+.desk__stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
 }
-.hero__lede {
-  font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-  max-width: 52ch;
-  margin-top: 4px;
-}
-.hero__weather {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: right;
-  border: 1px solid var(--rule);
-  padding: 18px 22px;
-  background: var(--paper-deep);
-  min-width: 280px;
-}
-.hero__weather-row { display: flex; align-items: baseline; justify-content: flex-end; gap: 10px; }
-.hero__big { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 44px; line-height: 1; letter-spacing: -0.02em; }
-.hero__big--sm { font-size: 28px; margin-top: 4px; }
-.hero__weather-sub { font-family: var(--font-pix); font-size: 10px; letter-spacing: 0.2em; color: var(--ink-muted); }
 
 .desk__section-title {
   display: flex;
@@ -429,12 +380,6 @@ const todayTop10Option = computed(() => {
   transition: color 0.2s var(--ease);
 }
 .desk__more:hover { color: var(--signal); }
-
-.desk__stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
 
 /* Flow */
 .desk__flow { display: flex; flex-direction: column; gap: 8px; }
@@ -564,9 +509,10 @@ const todayTop10Option = computed(() => {
 }
 
 @media (max-width: 1100px) {
-  .desk__stats { grid-template-columns: repeat(2, 1fr); }
+  .desk__stats { grid-template-columns: repeat(3, 1fr); }
   .desk__row { grid-template-columns: 1fr; }
-  .desk__hero { grid-template-columns: 1fr; }
-  .hero__col--right { align-items: flex-start; }
+}
+@media (max-width: 720px) {
+  .desk__stats { grid-template-columns: repeat(2, 1fr); }
 }
 </style>

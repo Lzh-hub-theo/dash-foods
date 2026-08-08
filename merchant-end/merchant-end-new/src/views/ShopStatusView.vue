@@ -6,7 +6,7 @@ import { ElMessage } from '@/api/notify'
 
 const shop = useShopStore()
 
-const headline = computed(() => (shop.isOpen ? 'THE SHOP IS OPEN.' : 'THE SHOP IS CLOSED.'))
+const headline = computed(() => (shop.isOpen ? '门店营业中' : '门店已打烊'))
 const lede = computed(() =>
   shop.isOpen
     ? '新订单正在涌入。员工可正常接单、菜品可下单。'
@@ -36,27 +36,27 @@ onMounted(() => shop.fetchStatus())
           :class="{ 'shop__btn--on': shop.isOpen }"
           @click="toggle"
         >
-          <span class="shop__btn-l font-mono">{{ shop.isOpen ? 'CLOSED NOW' : 'OPEN NOW' }}</span>
+          <span class="shop__btn-l font-mono">{{ shop.isOpen ? '打烊' : '开张' }}</span>
           <span class="shop__btn-arrow">→</span>
         </button>
       </div>
 
       <div class="shop__indicators">
         <div class="ind">
-          <div class="dateline">FRONT</div>
-          <div class="ind__big tnum headline">{{ shop.isOpen ? 'ON' : 'OFF' }}</div>
+          <div class="dateline">前台</div>
+          <div class="ind__big tnum headline">{{ shop.isOpen ? '开启' : '关闭' }}</div>
         </div>
         <div class="ind">
-          <div class="dateline">KITCHEN</div>
-          <div class="ind__big tnum headline">{{ shop.isOpen ? 'ON' : 'OFF' }}</div>
+          <div class="dateline">后厨</div>
+          <div class="ind__big tnum headline">{{ shop.isOpen ? '开启' : '关闭' }}</div>
         </div>
         <div class="ind">
-          <div class="dateline">DELIVERY</div>
-          <div class="ind__big tnum headline">{{ shop.isOpen ? 'ON' : 'OFF' }}</div>
+          <div class="dateline">配送</div>
+          <div class="ind__big tnum headline">{{ shop.isOpen ? '开启' : '关闭' }}</div>
         </div>
-        <div class="ind ind--accent">
-          <div class="dateline">ALL CHANNELS</div>
-          <div class="ind__big tnum headline">{{ shop.isOpen ? 'ON' : 'OFF' }}</div>
+        <div class="ind">
+          <div class="dateline">全部渠道</div>
+          <div class="ind__big tnum headline">{{ shop.isOpen ? '开启' : '关闭' }}</div>
         </div>
       </div>
     </div>
@@ -108,8 +108,8 @@ onMounted(() => shop.fetchStatus())
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(56px, 8vw, 110px);
-  letter-spacing: -0.025em;
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 .shop__lede {
@@ -125,22 +125,22 @@ onMounted(() => shop.fetchStatus())
 .shop__btn {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px 26px;
+  gap: 20px;
+  padding: 22px 38px;
   background: var(--paper);
   border: 1px solid var(--ink);
   font-family: var(--font-display);
   font-weight: 400;
   font-style: italic;
-  font-size: 24px;
+  font-size: 34px;
   letter-spacing: -0.01em;
   cursor: pointer;
   transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
 }
 .shop__btn::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: var(--ink);
   display: inline-block;
   flex: none;
@@ -150,7 +150,7 @@ onMounted(() => shop.fetchStatus())
 .shop__btn--on::before { background: var(--paper); }
 .shop__btn-l {
   font-family: var(--font-pix);
-  font-size: 11px;
+  font-size: 16px;
   letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
@@ -159,45 +159,38 @@ onMounted(() => shop.fetchStatus())
 .shop__btn-arrow {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1;
 }
 
 .shop__indicators {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 12px;
   margin-top: 18px;
 }
 .ind {
   border: 1px solid var(--rule);
-  padding: 14px 16px;
+  padding: 11px 14px;
   background: var(--paper);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), border-color 0.22s var(--ease);
 }
 .ind:hover { transform: translateY(-3px); box-shadow: 0 10px 22px -10px rgba(10, 10, 10, 0.14); border-color: var(--ink); }
 .ind .dateline {
   font-family: var(--font-pix);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.16em;
   color: var(--ink-muted);
   text-transform: uppercase;
 }
-.ind--accent {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.ind--accent .dateline { color: var(--paper-soft); }
-.ind--accent:hover { border-color: var(--ink); }
 .ind__big {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 300;
-  font-size: 32px;
+  font-size: 22px;
   line-height: 1;
   letter-spacing: -0.01em;
 }
@@ -221,6 +214,6 @@ onMounted(() => shop.fetchStatus())
 @media (max-width: 720px) {
   .shop__cover { padding: 32px 24px 36px; }
   .shop__indicators { grid-template-columns: repeat(2, 1fr); }
-  .shop__btn { font-size: 20px; padding: 14px 20px; }
+  .shop__btn { font-size: 26px; padding: 18px 26px; }
 }
 </style>

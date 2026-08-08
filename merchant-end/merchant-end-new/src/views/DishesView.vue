@@ -144,7 +144,7 @@ async function submitEdit() {
 }
 
 async function onDeleteOne(d: { id: number; name: string }) {
-  const ok = await ElMessageBox('DELETE', `确定删除菜品「${d.name}」?`, { danger: true, confirmText: 'DELETE' })
+  const ok = await ElMessageBox('删除', `确定删除菜品「${d.name}」?`, { danger: true, confirmText: '删除' })
   if (ok) {
     await dishStore.remove([d.id])
     selectedIds.value = selectedIds.value.filter((x) => x !== d.id)
@@ -154,9 +154,9 @@ async function onDeleteOne(d: { id: number; name: string }) {
 async function onDeleteSelected() {
   if (selectedIds.value.length === 0) return
   const ok = await ElMessageBox(
-    'DELETE',
+    '删除',
     `确定删除选中的 ${selectedIds.value.length} 项菜品?`,
-    { danger: true, confirmText: 'DELETE' },
+    { danger: true, confirmText: '删除' },
   )
   if (ok) {
     await dishStore.remove([...selectedIds.value])
@@ -194,30 +194,21 @@ onMounted(async () => {
 <template>
   <section class="dishes">
     <header class="dishes__head">
-      <div class="dishes__head-l">
-        <span class="dateline">§ MENU · 菜品目录</span>
-        <h2 class="dishes__title headline">DISHES</h2>
-      </div>
-      <div class="dishes__head-r">
-        <button v-if="selectedIds.length > 0" class="btn btn-signal" @click="onDeleteSelected">
-          DELETE SELECTED · {{ selectedIds.length }}
-        </button>
-        <button class="btn btn-signal" @click="openCreate">+ NEW DISH</button>
-      </div>
+      <span class="dateline">§ DISHES · 菜品管理</span>
     </header>
 
     <hr class="rule-thick" />
 
     <div class="dishes__filters">
       <div class="filter">
-        <span class="dateline">CATEGORY</span>
+        <span class="dateline">分类</span>
         <select v-model.number="catFilter" class="select">
           <option value="">全部</option>
           <option v-for="c in catOptions" :key="c.id" :value="c.id">{{ c.name }}</option>
         </select>
       </div>
       <div class="filter">
-        <span class="dateline">STATUS</span>
+        <span class="dateline">状态</span>
         <select v-model.number="statusFilter" class="select">
           <option value="">全部</option>
           <option :value="1">起售</option>
@@ -225,30 +216,34 @@ onMounted(async () => {
         </select>
       </div>
       <div class="filter filter--wide">
-        <span class="dateline">NAME</span>
+        <span class="dateline">名称</span>
         <input v-model="nameFilter" class="input" placeholder="按名称搜索" @keyup.enter="onSearch" />
       </div>
       <div class="filter__actions">
-        <button class="btn btn-sm" @click="onSearch">SEARCH</button>
-        <button class="btn btn-sm btn-ghost" @click="onReset">RESET</button>
+        <button class="btn btn-sm" @click="onSearch">查询</button>
+        <button class="btn btn-sm btn-ghost" @click="onReset">重置</button>
+        <button v-if="selectedIds.length > 0" class="btn btn-signal" @click="onDeleteSelected">
+          删除选中 · {{ selectedIds.length }}
+        </button>
+        <button class="btn btn-sm" @click="openCreate">+ 新增</button>
       </div>
     </div>
 
     <div class="dishes__table-wrap">
-      <div v-if="dishStore.loading && dishStore.list.length === 0" class="dishes__loading font-mono">LOADING…</div>
+      <div v-if="dishStore.loading && dishStore.list.length === 0" class="dishes__loading font-mono">加载中…</div>
       <EmptyState v-else-if="dishStore.list.length === 0" message="暂无菜品" hint="ADD A NEW ONE TO START" />
       <table v-else class="tbl dishes__tbl">
         <thead>
           <tr>
             <th class="dishes__check"><input type="checkbox" :checked="allChecked" @change="toggleAll" /></th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th class="t-right">Price</th>
-            <th class="t-right">Stock</th>
-            <th>Status</th>
-            <th>Updated</th>
-            <th class="t-right">Action</th>
+            <th>图片</th>
+            <th>名称</th>
+            <th>分类</th>
+            <th class="t-right">价格</th>
+            <th class="t-right">库存</th>
+            <th>状态</th>
+            <th>更新时间</th>
+            <th class="t-right">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -270,8 +265,8 @@ onMounted(async () => {
             <td class="font-mono dishes__time">{{ d.updateTime || '——' }}</td>
             <td class="t-right">
               <div class="actions">
-                <button class="btn btn-sm btn-ghost" @click="openEdit(d)">EDIT</button>
-                <button class="btn btn-sm btn-signal" @click="onDeleteOne(d)">DELETE</button>
+                <button class="btn btn-sm btn-ghost" @click="openEdit(d)">编辑</button>
+                <button class="btn btn-sm btn-signal" @click="onDeleteOne(d)">删除</button>
               </div>
             </td>
           </tr>
@@ -280,17 +275,17 @@ onMounted(async () => {
     </div>
 
     <div class="dishes__pager font-mono" v-if="dishStore.total > 0">
-      <span>TOTAL {{ dishStore.total }} · PAGE {{ page }} / {{ totalPages }}</span>
+      <span>共 {{ dishStore.total }} 条 · 第 {{ page }} / {{ totalPages }} 页</span>
       <div class="pager__btns">
-        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">PREV</button>
-        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">NEXT</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">上一页</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">下一页</button>
       </div>
     </div>
 
     <!-- 编辑 Modal -->
     <Modal
       :open="editOpen"
-      :title="editMode === 'create' ? 'NEW DISH' : 'EDIT DISH'"
+      :title="editMode === 'create' ? '新增菜品' : '编辑菜品'"
       width="760px"
       @close="editOpen = false"
     >
@@ -339,7 +334,7 @@ onMounted(async () => {
       <div class="flavors">
         <div class="flavors__head">
           <span class="dateline">FLAVORS · 口味（可加多组）</span>
-          <button class="btn btn-sm" @click="addFlavorRow">+ ADD FLAVOR</button>
+          <button class="btn btn-sm" @click="addFlavorRow">+ 添加口味</button>
         </div>
         <p v-if="flavorInput.length === 0" class="flavors__empty font-mono">NO FLAVOR YET</p>
         <div v-else class="flavors__list">
@@ -362,35 +357,25 @@ onMounted(async () => {
       </div>
 
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="editOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? 'CREATE' : 'SAVE' }}</button>
+        <button class="btn btn-sm btn-ghost" @click="editOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? '创建' : '保存' }}</button>
       </template>
     </Modal>
   </section>
 </template>
 
 <style scoped>
-.dishes { display: flex; flex-direction: column; gap: 18px; }
+.dishes { display: flex; flex-direction: column; gap: 14px; }
 .dishes__head {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
+  display: flex; align-items: flex-end; gap: 18px;
   padding-top: 4px;
 }
-.dishes__head-l { display: flex; flex-direction: column; gap: 8px; }
-.dishes__head-l .dateline {
+.dishes__head .dateline {
   font-family: var(--font-pix);
   font-size: 11px;
   letter-spacing: 0.16em;
   color: var(--ink-muted);
   text-transform: uppercase;
-}
-.dishes__head-r { display: flex; gap: 10px; }
-.dishes__title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 48px;
-  letter-spacing: -0.02em;
-  line-height: 1;
 }
 
 .dishes__filters {

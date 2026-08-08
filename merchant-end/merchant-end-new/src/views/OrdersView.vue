@@ -99,17 +99,17 @@ function onDetailClose() {
 }
 
 async function doConfirm(o: OrderVO) {
-  const ok = await ElMessageBox('CONFIRM', `确认接单 #${o.number}?`, { confirmText: 'ACCEPT' })
+  const ok = await ElMessageBox('接单', `确认接单 #${o.number}?`, { confirmText: '接单' })
   if (ok) await orderStore.confirm(o.id)
 }
 
 async function doDelivery(o: OrderVO) {
-  const ok = await ElMessageBox('DELIVER', `派送订单 #${o.number}?`, { confirmText: 'SEND' })
+  const ok = await ElMessageBox('派送', `派送订单 #${o.number}?`, { confirmText: '派送' })
   if (ok) await orderStore.delivery(o.id)
 }
 
 async function doComplete(o: OrderVO) {
-  const ok = await ElMessageBox('COMPLETE', `完成订单 #${o.number}?`, { confirmText: 'FINISH' })
+  const ok = await ElMessageBox('完成', `完成订单 #${o.number}?`, { confirmText: '完成' })
   if (ok) await orderStore.complete(o.id)
 }
 
@@ -165,20 +165,20 @@ watch(activeStatus, () => { /* noop */ })
     <!-- 搜索行 -->
     <div class="orders__filters">
       <div class="filter">
-        <span class="dateline">NO. / PHONE</span>
+        <span class="dateline">单号 / 手机号</span>
         <input v-model="keyword" class="input" placeholder="订单号或手机号" @keyup.enter="onSearch" />
       </div>
       <div class="filter">
-        <span class="dateline">FROM</span>
+        <span class="dateline">起始</span>
         <input v-model="dateFrom" type="date" class="input" />
       </div>
       <div class="filter">
-        <span class="dateline">TO</span>
+        <span class="dateline">截止</span>
         <input v-model="dateTo" type="date" class="input" />
       </div>
       <div class="filter__actions">
-        <button class="btn btn-sm" @click="onSearch">SEARCH</button>
-        <button class="btn btn-sm btn-ghost" @click="onReset">RESET</button>
+        <button class="btn btn-sm" @click="onSearch">查询</button>
+        <button class="btn btn-sm btn-ghost" @click="onReset">重置</button>
       </div>
     </div>
 
@@ -189,14 +189,14 @@ watch(activeStatus, () => { /* noop */ })
       <table v-else class="tbl orders__tbl">
         <thead>
           <tr>
-            <th>No.</th>
-            <th>Status</th>
-            <th>Customer</th>
-            <th>Phone</th>
-            <th>Items</th>
-            <th class="t-right">Amount</th>
-            <th>Order Time</th>
-            <th class="t-right">Action</th>
+            <th>订单号</th>
+            <th>状态</th>
+            <th>客户</th>
+            <th>手机号</th>
+            <th>商品数</th>
+            <th class="t-right">金额</th>
+            <th>下单时间</th>
+            <th class="t-right">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -213,12 +213,12 @@ watch(activeStatus, () => { /* noop */ })
             <td class="font-mono orders__time">{{ fmtTime(o.orderTime) }}</td>
             <td class="t-right">
               <div class="actions">
-                <button class="btn btn-sm btn-ghost" @click="openDetail(o)">VIEW</button>
-                <button v-if="o.status === 2" class="btn btn-sm btn-signal" @click="doConfirm(o)">ACCEPT</button>
-                <button v-if="o.status === 2" class="btn btn-sm" @click="openReject(o)">REJECT</button>
-                <button v-if="o.status === 3" class="btn btn-sm btn-signal" @click="doDelivery(o)">DELIVER</button>
-                <button v-if="o.status === 4" class="btn btn-sm btn-signal" @click="doComplete(o)">FINISH</button>
-                <button v-if="o.status === 2 || o.status === 3" class="btn btn-sm btn-ghost" @click="openCancel(o)">CANCEL</button>
+                <button class="btn btn-sm btn-ghost" @click="openDetail(o)">查看</button>
+                <button v-if="o.status === 2" class="btn btn-sm btn-signal" @click="doConfirm(o)">接单</button>
+                <button v-if="o.status === 2" class="btn btn-sm" @click="openReject(o)">拒单</button>
+                <button v-if="o.status === 3" class="btn btn-sm btn-signal" @click="doDelivery(o)">派送</button>
+                <button v-if="o.status === 4" class="btn btn-sm btn-signal" @click="doComplete(o)">完成</button>
+                <button v-if="o.status === 2 || o.status === 3" class="btn btn-sm btn-ghost" @click="openCancel(o)">取消</button>
               </div>
             </td>
           </tr>
@@ -228,55 +228,55 @@ watch(activeStatus, () => { /* noop */ })
 
     <!-- 分页 -->
     <div class="orders__pager font-mono" v-if="orderStore.total > 0">
-      <span>TOTAL {{ orderStore.total }} · PAGE {{ page }} / {{ totalPages }}</span>
+      <span>共 {{ orderStore.total }} 条 · 第 {{ page }} / {{ totalPages }} 页</span>
       <div class="pager__btns">
-        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">PREV</button>
-        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">NEXT</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">上一页</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">下一页</button>
       </div>
     </div>
 
     <!-- 详情 Modal -->
-    <Modal :open="detailOpen" title="ORDER DETAILS" width="640px" @close="onDetailClose">
-      <div v-if="detailLoading" class="font-mono" style="padding: 24px 0; letter-spacing: .2em;">LOADING…</div>
+    <Modal :open="detailOpen" title="订单详情" width="640px" @close="onDetailClose">
+      <div v-if="detailLoading" class="font-mono" style="padding: 24px 0; letter-spacing: .2em;">加载中…</div>
       <div v-else-if="detail" class="detail">
         <div class="detail__row">
-          <span class="dateline">NO.</span>
+          <span class="dateline">订单号</span>
           <span class="font-mono tnum">{{ detail.number }}</span>
         </div>
         <div class="detail__row">
-          <span class="dateline">STATUS</span>
+          <span class="dateline">状态</span>
           <StatusBadge :status="detail.status" />
         </div>
         <div class="detail__row">
-          <span class="dateline">CONSIGNEE</span>
+          <span class="dateline">收货人</span>
           <span>{{ detail.consignee || '——' }} <span class="font-mono">{{ detail.phone || '' }}</span></span>
         </div>
         <div class="detail__row detail__row--stack">
-          <span class="dateline">ADDRESS</span>
+          <span class="dateline">收货地址</span>
           <span>{{ detail.address || '——' }}</span>
         </div>
         <div class="detail__row">
-          <span class="dateline">ORDER TIME</span>
+          <span class="dateline">下单时间</span>
           <span class="font-mono">{{ fmtTime(detail.orderTime) }}</span>
         </div>
         <div v-if="detail.checkoutTime" class="detail__row">
-          <span class="dateline">CHECKOUT</span>
+          <span class="dateline">结账时间</span>
           <span class="font-mono">{{ fmtTime(detail.checkoutTime) }}</span>
         </div>
         <div v-if="detail.deliveryTime" class="detail__row">
-          <span class="dateline">DELIVERY</span>
+          <span class="dateline">派送时间</span>
           <span class="font-mono">{{ fmtTime(detail.deliveryTime) }}</span>
         </div>
         <div v-if="detail.cancelReason" class="detail__row">
-          <span class="dateline">CANCEL REASON</span>
+          <span class="dateline">取消原因</span>
           <span>{{ detail.cancelReason }}</span>
         </div>
         <div v-if="detail.rejectionReason" class="detail__row">
-          <span class="dateline">REJECT REASON</span>
+          <span class="dateline">拒单原因</span>
           <span>{{ detail.rejectionReason }}</span>
         </div>
         <hr class="rule" />
-        <div class="dateline" style="margin-bottom: 8px;">DISHES</div>
+        <div class="dateline" style="margin-bottom: 8px;">菜品明细</div>
         <ul class="dishes">
           <li v-for="d in detail.orderDetailList" :key="d.id" class="dish">
             <span class="dish__name">{{ d.name }}</span>
@@ -287,7 +287,7 @@ watch(activeStatus, () => { /* noop */ })
         </ul>
         <hr class="rule" />
         <div class="detail__row detail__row--big">
-          <span class="dateline">TOTAL</span>
+          <span class="dateline">合计</span>
           <span class="font-mono tnum detail__total">¥{{ detail.amount.toFixed(2) }}</span>
         </div>
       </div>
@@ -296,15 +296,15 @@ watch(activeStatus, () => { /* noop */ })
     <!-- 拒单 / 取消 Modal 共用 -->
     <Modal
       :open="rejectOpen"
-      :title="rejectMode === 'reject' ? 'REJECT ORDER' : 'CANCEL ORDER'"
+      :title="rejectMode === 'reject' ? '拒单' : '取消订单'"
       width="460px"
       @close="rejectOpen = false"
     >
-      <p class="modal__hint font-mono">PLEASE PROVIDE A REASON BELOW.</p>
+      <p class="modal__hint font-mono">请填写原因</p>
       <textarea v-model="rejectReason" class="input" rows="3" placeholder="例如：库存不足 / 用户取消" />
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="rejectOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="submitReject">CONFIRM</button>
+        <button class="btn btn-sm btn-ghost" @click="rejectOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="submitReject">确认</button>
       </template>
     </Modal>
   </section>

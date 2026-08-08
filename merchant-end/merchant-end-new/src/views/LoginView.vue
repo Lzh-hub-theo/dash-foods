@@ -40,7 +40,7 @@ async function onSubmit() {
       <div class="cover__top dateline">{{ dateLine }} · VOL. I · NO. 01</div>
       <hr class="rule-double" />
       <h1 class="cover__brand">DASH<br />FOODS.</h1>
-      <div class="cover__sub font-mono">— A MERCHANT DESK FOR THE MODERN KITCHEN —</div>
+      <div class="cover__sub font-mono">—— 现代厨房的商家指挥台 ——</div>
       <hr class="rule" />
 
       <div class="cover__body">
@@ -51,8 +51,8 @@ async function onSubmit() {
             都在同一张报纸里完成。
           </p>
           <p class="cover__p cover__p--muted">
-            Orders arrive. Dishes are plated. Numbers are settled.<br />
-            Issue after issue, day after day.
+            订单滚滚而来，菜品装盘上桌，账目一一结清。<br />
+            一日复一日，一版又一版。
           </p>
         </div>
         <div class="cover__column">
@@ -80,8 +80,8 @@ async function onSubmit() {
         <div class="form__eyebrow dateline">SIGN IN · 02</div>
         <h2 class="form__title headline">商家台<br />身份核验</h2>
         <p class="form__hint font-mono">
-          ENTER YOUR CREDENTIALS BELOW.<br />
-          ISSUE ACCESS TO THE DESK.
+          请在下方输入账号与密码。<br />
+          验证通过即可进入商家台。
         </p>
 
         <form @submit.prevent="onSubmit" class="form__fields">
@@ -92,7 +92,7 @@ async function onSubmit() {
               class="input"
               type="text"
               autocomplete="username"
-              placeholder="e.g. admin"
+              placeholder="请输入用户名"
               required
               autofocus
             />
@@ -104,23 +104,23 @@ async function onSubmit() {
               class="input"
               type="password"
               autocomplete="current-password"
-              placeholder="••••••"
+              placeholder="请输入密码"
               required
             />
           </label>
 
           <label class="check">
             <input v-model="remember" type="checkbox" />
-            <span class="font-mono">REMEMBER ME ON THIS TERMINAL</span>
+            <span class="font-mono">记住本机</span>
           </label>
 
           <button class="btn form__submit" :disabled="submitting" type="submit">
-            {{ submitting ? 'CHECKING…' : 'ENTER THE DESK →' }}
+            {{ submitting ? '登录中…' : '进入商家台' }}
           </button>
         </form>
 
         <div class="form__foot dateline">
-          DEFAULT · admin / 123456
+          默认账号 · admin / 123456
         </div>
       </div>
     </section>

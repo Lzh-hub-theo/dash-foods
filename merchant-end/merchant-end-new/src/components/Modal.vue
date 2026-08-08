@@ -26,7 +26,7 @@ watch(() => props.open, (v) => {
         <div class="m-dialog" :style="{ maxWidth: width || '560px' }">
           <header class="m-head">
             <h3 class="m-title headline">{{ title || '' }}</h3>
-            <button class="m-x font-mono" @click="close">CLOSE</button>
+            <button class="m-x font-mono" @click="close">关闭</button>
           </header>
           <hr class="rule" />
           <div class="m-body">

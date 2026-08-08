@@ -184,7 +184,7 @@ async function submitEdit() {
 }
 
 async function onDeleteOne(s: { id: number; name: string }) {
-  const ok = await ElMessageBox('DELETE', `确定删除套餐「${s.name}」?`, { danger: true, confirmText: 'DELETE' })
+  const ok = await ElMessageBox('删除', `确定删除套餐「${s.name}」?`, { danger: true, confirmText: '删除' })
   if (ok) await store.remove([s.id])
 }
 async function onTogglePill(s: { id: number; status: number }) {
@@ -202,27 +202,21 @@ onMounted(async () => {
 <template>
   <section class="setmeals">
     <header class="setmeals__head">
-      <div class="setmeals__head-l">
-        <span class="dateline">§ COMBOS · 套餐目录</span>
-        <h2 class="setmeals__title headline">SETMEALS</h2>
-      </div>
-      <div class="setmeals__head-r">
-        <button class="btn btn-signal" @click="openCreate">+ NEW SETMEAL</button>
-      </div>
+      <span class="dateline">§ SETMEALS · 套餐管理</span>
     </header>
 
     <hr class="rule-thick" />
 
     <div class="setmeals__filters">
       <div class="filter">
-        <span class="dateline">CATEGORY</span>
+        <span class="dateline">分类</span>
         <select v-model.number="catFilter" class="select">
           <option value="">全部</option>
           <option v-for="c in catOptions" :key="c.id" :value="c.id">{{ c.name }}</option>
         </select>
       </div>
       <div class="filter">
-        <span class="dateline">STATUS</span>
+        <span class="dateline">状态</span>
         <select v-model.number="statusFilter" class="select">
           <option value="">全部</option>
           <option :value="1">起售</option>
@@ -230,28 +224,29 @@ onMounted(async () => {
         </select>
       </div>
       <div class="filter filter--wide">
-        <span class="dateline">NAME</span>
+        <span class="dateline">名称</span>
         <input v-model="nameFilter" class="input" placeholder="按名称搜索" @keyup.enter="onSearch" />
       </div>
       <div class="filter__actions">
-        <button class="btn btn-sm" @click="onSearch">SEARCH</button>
-        <button class="btn btn-sm btn-ghost" @click="onReset">RESET</button>
+        <button class="btn btn-sm" @click="onSearch">查询</button>
+        <button class="btn btn-sm btn-ghost" @click="onReset">重置</button>
+        <button class="btn btn-sm" @click="openCreate">+ 新增</button>
       </div>
     </div>
 
     <div class="setmeals__table-wrap">
-      <div v-if="store.loading && store.list.length === 0" class="setmeals__loading font-mono">LOADING…</div>
+      <div v-if="store.loading && store.list.length === 0" class="setmeals__loading font-mono">加载中…</div>
       <EmptyState v-else-if="store.list.length === 0" message="暂无套餐" hint="ADD A NEW ONE TO START" />
       <table v-else class="tbl setmeals__tbl">
         <thead>
           <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th class="t-right">Price</th>
-            <th>Status</th>
-            <th>Updated</th>
-            <th class="t-right">Action</th>
+            <th>图片</th>
+            <th>名称</th>
+            <th>分类</th>
+            <th class="t-right">价格</th>
+            <th>状态</th>
+            <th>更新时间</th>
+            <th class="t-right">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -271,8 +266,8 @@ onMounted(async () => {
             <td class="font-mono setmeals__time">{{ s.updateTime || '——' }}</td>
             <td class="t-right">
               <div class="actions">
-                <button class="btn btn-sm btn-ghost" @click="openEdit(s)">EDIT</button>
-                <button class="btn btn-sm btn-signal" @click="onDeleteOne(s)">DELETE</button>
+                <button class="btn btn-sm btn-ghost" @click="openEdit(s)">编辑</button>
+                <button class="btn btn-sm btn-signal" @click="onDeleteOne(s)">删除</button>
               </div>
             </td>
           </tr>
@@ -281,17 +276,17 @@ onMounted(async () => {
     </div>
 
     <div class="setmeals__pager font-mono" v-if="store.total > 0">
-      <span>TOTAL {{ store.total }} · PAGE {{ page }} / {{ totalPages }}</span>
+      <span>共 {{ store.total }} 条 · 第 {{ page }} / {{ totalPages }} 页</span>
       <div class="pager__btns">
-        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">PREV</button>
-        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">NEXT</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">上一页</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">下一页</button>
       </div>
     </div>
 
     <!-- 主编辑 Modal -->
     <Modal
       :open="editOpen"
-      :title="editMode === 'create' ? 'NEW SETMEAL' : 'EDIT SETMEAL'"
+      :title="editMode === 'create' ? '新增套餐' : '编辑套餐'"
       width="820px"
       @close="editOpen = false"
     >
@@ -335,8 +330,8 @@ onMounted(async () => {
 
       <div class="dishes">
         <div class="dishes__head">
-          <span class="dateline">DISHES IN SETMEAL · 套餐内菜品（{{ pickedDishes.length }}）</span>
-          <button class="btn btn-sm" @click="openPicker">+ PICK DISHES</button>
+          <span class="dateline">套餐内菜品（{{ pickedDishes.length }}）</span>
+          <button class="btn btn-sm" @click="openPicker">+ 选择菜品</button>
         </div>
         <p v-if="pickedDishes.length === 0" class="dishes__empty font-mono">NONE PICKED</p>
         <div v-else class="dishes__list">
@@ -358,13 +353,13 @@ onMounted(async () => {
       </div>
 
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="editOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? 'CREATE' : 'SAVE' }}</button>
+        <button class="btn btn-sm btn-ghost" @click="editOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? '创建' : '保存' }}</button>
       </template>
     </Modal>
 
     <!-- 选菜品 Modal -->
-    <Modal :open="pickerOpen" title="PICK DISHES" width="640px" @close="pickerOpen = false">
+    <Modal :open="pickerOpen" title="选择菜品" width="640px" @close="pickerOpen = false">
       <label class="field">
         <span class="field__label dateline">CATEGORY · 按分类筛选</span>
         <select v-model.number="pickerCat" class="select" @change="onPickerCatChange">
@@ -372,7 +367,7 @@ onMounted(async () => {
         </select>
       </label>
       <div class="picker">
-        <div v-if="pickerLoading" class="picker__loading font-mono">LOADING…</div>
+        <div v-if="pickerLoading" class="picker__loading font-mono">加载中…</div>
         <div v-else-if="pickerDishes.length === 0" class="picker__loading font-mono">NO DISHES</div>
         <label
           v-for="d in pickerDishes" :key="d.id"
@@ -387,7 +382,7 @@ onMounted(async () => {
           <span class="picker__name">{{ d.name }}</span>
           <span class="picker__price font-mono tnum">{{ fmtPrice(d.price) }}</span>
           <span class="picker__status font-mono" :class="d.status === 1 ? 'on' : 'off'">
-            {{ d.status === 1 ? 'ON' : 'OFF' }}
+            {{ d.status === 1 ? '在售' : '停售' }}
           </span>
           <div class="picker__copies" v-if="pickerSelected.has(d.id)">
             <span class="font-mono">×</span>
@@ -402,35 +397,25 @@ onMounted(async () => {
         </label>
       </div>
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="pickerOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="confirmPicker">CONFIRM · {{ pickerSelected.size }}</button>
+        <button class="btn btn-sm btn-ghost" @click="pickerOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="confirmPicker">确认 · {{ pickerSelected.size }}</button>
       </template>
     </Modal>
   </section>
 </template>
 
 <style scoped>
-.setmeals { display: flex; flex-direction: column; gap: 18px; }
+.setmeals { display: flex; flex-direction: column; gap: 14px; }
 .setmeals__head {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
+  display: flex; align-items: flex-end; gap: 18px;
   padding-top: 4px;
 }
-.setmeals__head-l { display: flex; flex-direction: column; gap: 8px; }
-.setmeals__head-l .dateline {
+.setmeals__head .dateline {
   font-family: var(--font-pix);
   font-size: 11px;
   letter-spacing: 0.16em;
   color: var(--ink-muted);
   text-transform: uppercase;
-}
-.setmeals__head-r { display: flex; gap: 10px; }
-.setmeals__title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 48px;
-  letter-spacing: -0.02em;
-  line-height: 1;
 }
 
 .setmeals__filters {

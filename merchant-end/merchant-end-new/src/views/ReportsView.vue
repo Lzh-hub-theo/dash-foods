@@ -231,13 +231,7 @@ onMounted(() => {
 <template>
   <section class="reports">
     <header class="reports__head">
-      <div class="reports__head-l">
-        <span class="dateline">§ STATISTICS · 数据统计</span>
-        <h2 class="reports__title headline">REPORTS</h2>
-      </div>
-      <div class="reports__head-r">
-        <button class="btn" @click="onExport">EXPORT EXCEL</button>
-      </div>
+      <span class="dateline">§ REPORTS · 数据报表</span>
     </header>
 
     <hr class="rule-thick" />
@@ -253,12 +247,13 @@ onMounted(() => {
         <input v-model="store.query.end" type="date" class="input" />
       </label>
       <div class="reports__quick">
-        <button class="btn btn-sm btn-ghost" @click="quickRange(1)">TODAY</button>
-        <button class="btn btn-sm btn-ghost" @click="quickRange(7)">7 DAYS</button>
-        <button class="btn btn-sm btn-ghost" @click="quickRange(30)">30 DAYS</button>
+        <button class="btn btn-sm btn-ghost" @click="quickRange(1)">今日</button>
+        <button class="btn btn-sm btn-ghost" @click="quickRange(7)">近 7 日</button>
+        <button class="btn btn-sm btn-ghost" @click="quickRange(30)">近 30 日</button>
       </div>
       <div class="reports__apply">
-        <button class="btn btn-sm btn-signal" @click="applyFilter">APPLY</button>
+        <button class="btn btn-sm" @click="applyFilter">应用</button>
+        <button class="btn btn-sm btn-ghost" @click="onExport">导出 Excel</button>
       </div>
     </div>
 
@@ -277,14 +272,14 @@ onMounted(() => {
           :loading="store.loading"
         />
         <StatBlock
-          label="VALID ORDERS · 有效订单"
+          label="有效订单"
           :value="totalValidOrders"
           unit="单"
           accent="olive"
           :loading="store.loading"
         />
         <StatBlock
-          label="COMPLETION RATE · 订单完成率"
+          label="订单完成率"
           :value="fmtPct(completionRate)"
           accent="press"
           :loading="store.loading"
@@ -305,7 +300,7 @@ onMounted(() => {
         <h3 class="reports__sec-title">TURNOVER · 营业额走势</h3>
       </div>
       <ChartCard
-        title="TURNOVER"
+        title="营业额"
         section="每日营业额（CNY）"
         :option="turnoverOption"
         :loading="store.loading"
@@ -320,7 +315,7 @@ onMounted(() => {
           <h3 class="reports__sec-title">USERS · 用户增长</h3>
         </div>
         <ChartCard
-          title="USERS"
+          title="用户"
           section="新增 / 总量"
           :option="userOption"
           :loading="store.loading"
@@ -332,7 +327,7 @@ onMounted(() => {
           <h3 class="reports__sec-title">ORDERS · 订单量</h3>
         </div>
         <ChartCard
-          title="ORDERS"
+          title="订单"
           section="总订单 / 有效订单"
           :option="orderOption"
           :loading="store.loading"
@@ -349,7 +344,7 @@ onMounted(() => {
       <EmptyState v-if="store.top10Chart.names.length === 0" message="暂无销量数据" hint="PICK A WIDER RANGE" />
       <ChartCard
         v-else
-        title="TOP 10"
+        title="销量榜 TOP 10"
         section="区间内销量前 10 名菜品"
         :option="top10Option"
         :loading="store.loading"
@@ -388,12 +383,18 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.reports { display: flex; flex-direction: column; gap: 22px; }
+.reports { display: flex; flex-direction: column; gap: 14px; }
 .reports__head {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
+  display: flex; align-items: flex-end; gap: 18px;
+  padding-top: 4px;
 }
-.reports__head-l { display: flex; flex-direction: column; gap: 6px; }
-.reports__title { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 38px; letter-spacing: -0.02em; line-height: 1; }
+.reports__head .dateline {
+  font-family: var(--font-pix);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
 
 /* 筛选条 */
 .reports__filters {

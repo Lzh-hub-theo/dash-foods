@@ -28,7 +28,7 @@ async function onClick() {
     @click.stop="onClick"
   >
     <span class="pill__dot" />
-    <span class="pill__label">{{ isOn ? (onLabel || 'ON SALE') : (offLabel || 'OFF SHELF') }}</span>
+    <span class="pill__label">{{ isOn ? (onLabel || '在售') : (offLabel || '停售') }}</span>
   </button>
 </template>
 

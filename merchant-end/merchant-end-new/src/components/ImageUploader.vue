@@ -77,18 +77,18 @@ function clear() {
     <template v-if="localUrl">
       <img :src="localUrl" alt="" class="up__img" />
       <div class="up__mask">
-        <span class="up__hint font-mono">CHANGE IMAGE</span>
+        <span class="up__hint font-mono">更换图片</span>
       </div>
     </template>
     <template v-else>
       <div class="up__placeholder">
         <div class="up__plus font-display">+</div>
-        <div class="up__label font-mono">DROP IMAGE / CLICK</div>
+        <div class="up__label font-mono">拖入图片 / 点击上传</div>
         <div class="up__sub dateline">JPG · PNG · ≤ {{ props.maxSizeMB ?? 5 }} MB</div>
       </div>
     </template>
 
-    <div v-if="uploading" class="up__loading font-mono">UPLOADING…</div>
+    <div v-if="uploading" class="up__loading font-mono">上传中…</div>
 
     <button v-if="localUrl && !uploading" class="up__x font-mono" @click.stop="clear">×</button>
   </div>

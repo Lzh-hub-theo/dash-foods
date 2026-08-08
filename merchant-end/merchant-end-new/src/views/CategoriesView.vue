@@ -74,7 +74,7 @@ async function submitEdit() {
 }
 
 async function onDelete(c: Category) {
-  const ok = await ElMessageBox('DELETE', `确定要删除分类「${c.name}」?`, { danger: true, confirmText: 'DELETE' })
+  const ok = await ElMessageBox('删除', `确定要删除分类「${c.name}」?`, { danger: true, confirmText: '删除' })
   if (ok) await store.remove(c.id)
 }
 
@@ -91,48 +91,43 @@ onMounted(load)
 <template>
   <section class="cats">
     <header class="cats__head">
-      <div class="cats__head-l">
-        <span class="dateline">§ CATEGORIES · 分类目录</span>
-        <h2 class="cats__title headline">{{ typeLabel }}</h2>
-      </div>
-      <div class="cats__head-r">
-        <button class="btn btn-signal" @click="openCreate">+ NEW {{ typeFilter === 1 ? 'DISH' : 'SETMEAL' }} CATEGORY</button>
-      </div>
+      <span class="dateline">§ CATEGORIES · 分类管理</span>
     </header>
 
     <hr class="rule-thick" />
 
     <div class="cats__filters">
       <div class="filter">
-        <span class="dateline">TYPE</span>
+        <span class="dateline">类型</span>
         <select v-model.number="typeFilter" class="select" @change="onSearch">
           <option :value="1">菜品分类</option>
           <option :value="2">套餐分类</option>
         </select>
       </div>
       <div class="filter">
-        <span class="dateline">NAME</span>
+        <span class="dateline">名称</span>
         <input v-model="nameFilter" class="input" placeholder="按名称搜索" @keyup.enter="onSearch" />
       </div>
       <div class="filter__actions">
-        <button class="btn btn-sm" @click="onSearch">SEARCH</button>
-        <button class="btn btn-sm btn-ghost" @click="onReset">RESET</button>
+        <button class="btn btn-sm" @click="onSearch">查询</button>
+        <button class="btn btn-sm btn-ghost" @click="onReset">重置</button>
+        <button class="btn btn-sm" @click="openCreate">+ 新增</button>
       </div>
     </div>
 
     <div class="cats__table-wrap">
-      <div v-if="store.loading && store.list.length === 0" class="cats__loading font-mono">LOADING…</div>
+      <div v-if="store.loading && store.list.length === 0" class="cats__loading font-mono">加载中…</div>
       <EmptyState v-else-if="store.list.length === 0" message="暂无分类" hint="ADD A NEW ONE TO START" />
       <table v-else class="tbl cats__tbl">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th class="t-right">Sort</th>
-            <th>Status</th>
-            <th>Updated</th>
-            <th class="t-right">Action</th>
+            <th>编号</th>
+            <th>名称</th>
+            <th>类型</th>
+            <th class="t-right">排序</th>
+            <th>状态</th>
+            <th>更新时间</th>
+            <th class="t-right">操作</th>
           </tr>
         </thead>
         <tbody>
@@ -148,14 +143,14 @@ onMounted(load)
                 @click="onToggle(c)"
                 :title="c.status === 1 ? '点击停用' : '点击启用'"
               >
-                {{ c.status === 1 ? 'ACTIVE' : 'DISABLED' }}
+                {{ c.status === 1 ? '启用' : '停用' }}
               </span>
             </td>
             <td class="font-mono cats__time">{{ c.updateTime || '——' }}</td>
             <td class="t-right">
               <div class="actions">
-                <button class="btn btn-sm btn-ghost" @click="openEdit(c)">EDIT</button>
-                <button class="btn btn-sm btn-signal" @click="onDelete(c)">DELETE</button>
+                <button class="btn btn-sm btn-ghost" @click="openEdit(c)">编辑</button>
+                <button class="btn btn-sm btn-signal" @click="onDelete(c)">删除</button>
               </div>
             </td>
           </tr>
@@ -164,17 +159,17 @@ onMounted(load)
     </div>
 
     <div class="cats__pager font-mono" v-if="store.total > 0">
-      <span>TOTAL {{ store.total }} · PAGE {{ page }} / {{ totalPages }}</span>
+      <span>共 {{ store.total }} 条 · 第 {{ page }} / {{ totalPages }} 页</span>
       <div class="pager__btns">
-        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">PREV</button>
-        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">NEXT</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page <= 1" @click="onPage(page - 1)">上一页</button>
+        <button class="btn btn-sm btn-ghost" :disabled="page >= totalPages" @click="onPage(page + 1)">下一页</button>
       </div>
     </div>
 
     <!-- 新增/编辑 Modal -->
     <Modal
       :open="editOpen"
-      :title="editMode === 'create' ? 'NEW CATEGORY' : 'EDIT CATEGORY'"
+      :title="editMode === 'create' ? '新增分类' : '编辑分类'"
       width="460px"
       @close="editOpen = false"
     >
@@ -196,37 +191,27 @@ onMounted(load)
         </label>
       </div>
       <template #footer>
-        <button class="btn btn-sm btn-ghost" @click="editOpen = false">CANCEL</button>
-        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? 'CREATE' : 'SAVE' }}</button>
+        <button class="btn btn-sm btn-ghost" @click="editOpen = false">取消</button>
+        <button class="btn btn-sm btn-signal" @click="submitEdit">{{ editMode === 'create' ? '创建' : '保存' }}</button>
       </template>
     </Modal>
   </section>
 </template>
 
 <style scoped>
-.cats { display: flex; flex-direction: column; gap: 18px; }
+.cats { display: flex; flex-direction: column; gap: 14px; }
 .cats__head {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
   gap: 18px;
   padding-top: 4px;
 }
-.cats__head-l { display: flex; flex-direction: column; gap: 8px; }
-.cats__head-l .dateline {
+.cats__head .dateline {
   font-family: var(--font-pix);
   font-size: 11px;
   letter-spacing: 0.16em;
   color: var(--ink-muted);
   text-transform: uppercase;
-}
-.cats__title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 48px;
-  letter-spacing: -0.02em;
-  line-height: 1;
 }
 
 .cats__filters {
